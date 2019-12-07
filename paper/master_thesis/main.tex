@@ -1,0 +1,100 @@
+
+% 修論メインフォーマット
+% 佐川さんの昨年の修論を借りています
+
+\documentclass[a4j,12pt]{jreport}
+
+% 修論フォーマットスタイルファイル
+\usepackage{stylefile/mpaper}
+\usepackage{stylefile/fancyheadings}
+\usepackage{stylefile/cite}
+
+% 追加パッケージ
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{stylefile/multirow}
+\usepackage{stylefile/slashbox}
+\usepackage{url}
+\usepackage{longtable}
+\usepackage{epsfig}
+\usepackage{comment}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{comment}
+\usepackage{here}
+\usepackage{threeparttable}
+
+% 数式系パッケージ
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}               % ベクトル表記（ボールド体）
+\newcommand{\argmax}{\mathop{\rm arg~max}\limits}
+\newcommand{\argmin}{\mathop{\rm arg~min}\limits}
+
+\begin{document}
+
+\begin{titlepage}
+\thesis
+{2019}                % 年度
+{和文タイトル}       % 和文タイトル
+{○○　○○}                % 氏名
+{12345678}          % 学籍番号
+{萩原 将文}         % 指導教員名
+{2020}                % 卒業年
+{3} % 卒業月
+\end{titlepage}
+
+% ------------------------------------ ヘッダ --------------------------------------
+
+\renewcommand{\thepage}{--\roman{page}--}
+
+% 和文アブスト
+\jabstract
+\input{document/0_jabstract}
+
+\eabstract{} % 英文タイトル
+% 英語アブスト
+\input{document/0_eabstract}
+
+% 目次
+\contents
+
+\pagenumbering{arabic}
+
+% ------------------------------------　本編 --------------------------------------
+\chapter{序論}
+\input{document/1_introduction}
+
+\chapter{提案手法}
+\input{document/2_related_works}
+
+\chapter{提案手法}
+\input{document/3_proposed_model}
+
+\chapter{評価実験}
+\input{document/4_experiments}
+
+\chapter{考察}
+\input{document/5_discussion}
+
+\chapter{結論}
+\input{document/6_conclusion}
+
+
+% ------------------------------------ フッタ ----------------------------------------
+
+% 謝辞
+\acknowledgment
+\input{document/acknowledgement}
+
+% 参考文献
+\bibliographystyle{./stylefile/jcustom}
+\bibliography{./reference/reference}
+
+% ------------------------------------ 付録 ---------------------------------------
+\appendix
+\chapter{付録}
+\input{document/appendix}
+
+\end{document}

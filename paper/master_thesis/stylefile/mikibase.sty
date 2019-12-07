@@ -1,0 +1,69 @@
+%--------------------------------------------------------------%
+%	Style File for Style files "mikibase"     		           %
+%	at Inteligent System Design Laboratory, Doshisha Univ.	   %
+%   Designed by  LaTeX Team (Jun-ichi YOSHIDA/junichi@mikilab) %
+%   Redesigned by LaTeX Team 2002(Takanori MIZUTA/taka@mikilab)%
+%--------------------------------------------------------------%
+%   $Id: mikibase.sty,v 1.1.1.1 2004/06/19 10:08:08 junjis Exp $
+%--------------------------------------------------------------%
+%
+%三木研のLaTeXチームが作成したすべてのスタイルファイルはこのス
+%タイルファイルを参照します．すべてのスタイルファイルに関連する
+%変更はこのスタイルファイルを利用して行います．
+%
+%--------------------------------------------------------------
+%include style files
+%--------------------------------------------------------------
+
+\usepackage{multicol}
+\usepackage{epsf}
+\usepackage{graphics}
+\usepackage{boxedminipage}
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ascmac}
+\usepackage{enumerate}
+\usepackage{url} % added 2.1
+
+%--------------------------------------------------------------
+%tbcaptionとfgcaptionの定義
+%--------------------------------------------------------------
+
+\def\tbcaption{\def\@captype{table}\caption}
+\def\fgcaption{\def\@captype{figure}\caption}
+
+\def\term#1{
+	{\bf #1}
+}
+
+\def\path#1{
+	\texttt{#1}
+}
+
+%--------------------------------------------------------------
+% 出典
+%--------------------------------------------------------------
+% 論文の出典を記述します．bibTeXの文献データベース作成に必要な項目をすべ
+% て満たすように注意してください（タイトルや著者名は除く）．
+% \src{0}{}とすると表示されません．\src{1}{}とすると表示されます．
+
+\def\src#1#2{
+\ifnum#1=0%
+\else%
+\newpage
+\thispagestyle{empty}
+\noindent{\bf 出典：}\\
+#2\\
+
+
+\noindent{\bf 問い合わせ先：}\\
+{\small 
+同志社大学工学部/
+同志社大学大学院工学研究科
+}\\
+\noindent 知的システムデザイン研究室\\
+(http://mikilab.doshisha.ac.jp)
+\fi
+}
+

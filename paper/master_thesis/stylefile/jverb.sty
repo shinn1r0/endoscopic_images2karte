@@ -1,0 +1,243 @@
+%jverb.sty v1.07
+%
+%		 by 21M	   e-mail: czd16105@nifty.ne.jp
+%	Modified by やまね e-mail: rsm23381@biglobe.ne.jp
+%
+% This file is in the public domain.
+%%%
+% Usage:
+%	\begin{jverbatim}…\end{jverbatim}
+%	\begin{jverbatim*}…\end{jverbatim*}
+%	\jverb|…|
+%	\jverb*|…|
+%%%
+\ifnum\the\catcode`\@=11 \let\jv@insty\relax \else \makeatletter \fi
+%-----------
+\typeout{jverb.sty 1.07 --- by 21M, Feb 28 2003}%
+\def\jv@ksample{爍}% 何でもいいから漢字1字。注釈以外では本ファイル唯一の
+  % 日本語文字。念のため、MS漢字コードでも日本語文字になるようなのを選んである
+\newif\ifjv@strhead\newif\ifjv@strsame
+\def\jv@eatarg#1\relax#2\relax{}
+\def\jv@strhead#1#2{%
+	\edef\jv@tmparg{%
+		#1\noexpand\jv@strend\relax#2\noexpand\jv@strend\relax
+	}%
+	\expandafter\jv@strheadsub\jv@tmparg
+}
+\def\jv@strheadsub#1#2\relax#3#4\relax{%
+	\let\jv@next\jv@eatarg
+	\ifx#1\jv@strend
+		\jv@strheadtrue
+		\ifx#3\jv@strend\jv@strsametrue \else\jv@strsamefalse \fi
+	\else
+		\if#1#3\let\jv@next\jv@strheadsub
+		\else \jv@strheadfalse\jv@strsamefalse \fi
+	\fi \jv@next#2\relax#4\relax
+}
+%-----------
+\begingroup
+	{\catcode"D=12\gdef\jv@rawcr{^^M}}
+	{\catcode"9=12\gdef\jv@rawtab{^^I}}
+	{\catcode"20=12\gdef\jv@rawspc{ }}
+	{\catcode"7E=12\gdef\jv@rawtld{~}}
+	\catcode"5B=1\catcode"5D=2\catcode"21=0
+	\catcode"7B=12\catcode"7D=12\catcode"5C=12
+	!gdef!@endjverbatim[end{jverbatim}]%
+	!gdef!@endjverbstar[end{jverbatim*}]%
+	!gdef!jv@rawbksl[\]%
+!endgroup
+\def\jv@main#1{%
+	\def\jv@tmparg{#1}%
+	%\typeout{arg=#1}%
+	\ifx\jv@tmparg\jv@rawbksl
+		\let\jv@next=\jv@sub \def\jv@endcmp{}%
+	\else
+		\jv@charout#1\let\jv@next=\jv@main
+	\fi \jv@next
+}
+\newif\ifjv@starmode
+\def\jv@sub#1{%
+	\edef\jv@endcmp{\jv@endcmp#1}\setbox\jv@onecharbox=\hbox{#1}%
+	 % ASCII jTeX(の古い版?)では2バイト文字の比較にバグあり
+	\ifdim\jv@spclen=\the\wd\jv@onecharbox
+		\ifjv@starmode \jv@strhead\jv@endcmp\@endjverbstar
+		\else \jv@strhead\jv@endcmp\@endjverbatim \fi
+	\else \jv@strheadfalse\jv@strsamefalse \fi
+	\ifjv@strhead
+		\ifjv@strsame
+			\global\jv@curline=\jv@curline
+			\global\jv@curcol=\jv@curcol
+			\global\jv@igntabs=\jv@igntabs
+			\ifjv@nontabfound \global\jv@nontabfoundtrue
+			\else \global\jv@nontabfoundfalse \fi
+			\ifjv@aftercr \global\jv@aftercrtrue 
+			\else \global\jv@aftercrfalse \fi
+			%
+			\ifjv@starmode \end{jverbatim*}\else \end{jverbatim}\fi
+			\let\jv@next\relax \let\jv@tmparg\empty
+		\else \let\jv@next\jv@sub \let\jv@tmparg\empty \fi
+	\else
+		\jv@charout\jv@rawbksl
+		\let\jv@next\jv@main \let\jv@tmparg\jv@endcmp
+	\fi \expandafter\jv@next\jv@tmparg
+}
+\newcount\jvtabstop \jvtabstop=8
+\newdimen\jvemptylinenarrow \jvemptylinenarrow0pt
+\newif\ifjvusejisroman \jvusejisromanfalse
+\newif\ifjvkwidthbase \jvkwidthbasefalse
+\newif\ifjv@nontabfound \jv@nontabfoundfalse
+\newif\ifjv@aftercr \jv@aftercrfalse \newif\ifjv@cont \jv@contfalse
+\newif\ifjv@emptyline
+\newcount\jv@curline \jv@curline=0 \newcount\jv@curcol \jv@curcol=0
+\newcount\jv@igntabs \jv@igntabs=0
+\newcount\jv@tmpcount \newcount\jv@igntabcount
+\newbox\jv@onecharbox \newdimen\jv@spclen \newdimen\jv@hlfbxlen
+\def\jverbatim{\jv@starmodefalse\jv@init}
+\def\jv@init{%
+	\begingroup\ignorespaces\tt\parindent0pt\mbox{}%
+	\jv@tmpcount="20\loop\ifnum\the\jv@tmpcount<"7F
+		\catcode\the\jv@tmpcount=12
+	\advance\jv@tmpcount by1\repeat
+	\catcode"9=12\catcode"D=12% \jv@charout uses following miscs
+	\ifjv@cont\relax\else
+		\jv@curline=0 \jv@curcol=0 \jv@igntabs=0
+		\jv@nontabfoundfalse\jv@aftercrfalse
+	\fi \global\jv@contfalse
+	\setbox\jv@onecharbox=\hbox{ }\jv@spclen=\the\wd\jv@onecharbox
+	\ifjvkwidthbase \jv@hlfbxlen.5zw \else \jv@hlfbxlen\jv@spclen \fi
+	\jv@main
+}
+\def\endjverbatim{\endgroup}
+\@namedef{jverbatim*}{\jv@starmodetrue\jv@init}
+\@namedef{endjverbatim*}{\endgroup}
+\def\jvintermed#1{\advance\jv@curcol by #1 \jv@conttrue}
+%-----------
+\def\jv@yen{{\ooalign{\hfill Y\hfill\crcr\hfill =\hfill}}}
+\def\jv@ovl{\raisebox{.66em}{\char95}}
+\def\jv@charout#1{%
+	\ifjv@aftercr
+		\ifnum\jv@curline>1
+			\par \ifjv@emptyline \vskip-\jvemptylinenarrow \fi
+			\parskip0pt\mbox{}%
+			% \mbox{}は空行に警告が出ないためと行頭の空白有効化
+			% \hbox{}だと行が余分に空く(\par直後だから)
+			% 最初の改行以後は\parskipを0にしておく
+		\else\relax \fi
+	\else
+		\ifx\jv@tmparg\jv@rawspc\hbox{}\fi
+	\fi
+	%\typeout{arg:#1}%
+	\def\jv@tmparg{#1}%
+	\ifx\jv@tmparg\jv@rawcr
+		\advance\jv@curline by1 \jv@aftercrtrue
+		\ifnum\jv@curcol=0 \jv@emptylinetrue \else\jv@emptylinefalse\fi
+		\jv@curcol=0 \jv@igntabcount=\jv@igntabs
+	\else\ifx\jv@tmparg\jv@rawtab
+		\ifnum\jv@curline=0\advance\jv@curline by1\fi \jv@aftercrfalse
+		\ifjv@nontabfound
+			\def\jv@tmparg{%
+				\ifjv@starmode\jv@rawspc \else\hbox{ }\fi
+			}%
+			\ifnum\jv@igntabcount=0 \loop
+				%元は\ifjvkwidthbase\makebox[.5zw]{\jv@tmparg}%
+				%\else\jv@tmparg \fi だったが下方の非タブの場合
+				%と揃えて変更
+				\makebox[\jv@hlfbxlen]{\jv@tmparg}%
+				\advance\jv@curcol by1 \jv@tmpcount=\jv@curcol
+				\divide\jv@tmpcount by\jvtabstop
+				\multiply\jv@tmpcount by\jvtabstop
+				\ifnum\jv@tmpcount<\jv@curcol \repeat
+			\else
+				\advance\jv@igntabcount by-1
+			\fi
+		\else
+			\advance\jv@igntabs by1
+		\fi
+	\else
+		\ifnum\jv@curline=0\advance\jv@curline by1\fi \jv@aftercrfalse
+		\jv@nontabfoundtrue\jv@igntabcount=0
+		\setbox\jv@onecharbox=\hbox{#1}%
+		%\typeout{width(#1)=\the\wd\jv@onecharbox}%
+		\ifdim\jv@spclen=\the\wd\jv@onecharbox
+		%\tt環境のことしか考えていない
+			\ifx\jv@tmparg\jv@rawspc
+				\ifjv@starmode\relax
+				\else \def\jv@tmparg{\hbox{ }}\fi
+			\else
+				\ifjvusejisroman
+					\ifx#1\jv@rawbksl
+						\let\jv@tmparg\jv@yen
+					\else \ifx\jv@tmparg\jv@rawtld
+						\let\jv@tmparg\jv@ovl
+					\fi\fi
+					% \jv@rawbkslとの比較には#1、\jv@rawtld
+					% との比較には\jv@tmpargを使う
+					% #1に「\」が渡されるのは
+					% 「\end{jverbatim}」との比較に失敗して
+					% \jv@charout\jv@rawbkslをする時なので
+					% #1を使わないと正しく比較できない
+				\fi
+			\fi
+			% 下記は元は \ifjvkwidthbase\makebox[.5zw]{\jv@tmparg}%
+			% \else\jv@tmparg \fi だったがプリンタドライバの問題に
+			% よる位置ずれ誤差の蓄積を防ぐため変更
+			\makebox[\jv@hlfbxlen]{\jv@tmparg}%
+			\advance\jv@curcol by1
+		\else
+			\makebox[2\jv@hlfbxlen]{%
+				\ifdim\the\wd\jv@onecharbox=1zw #1\else
+					\phantom{\jv@ksample #1}\mbox{#1}%
+					\phantom{#1\jv@ksample}%
+				\fi
+			}\advance\jv@curcol by2
+		\fi
+	\fi\fi
+}
+%-----------
+\def\jverb{% タブ・改行は特別扱いなし
+	\begingroup\tt\jv@curcol=0
+	\jv@tmpcount="20\loop\ifnum\the\jv@tmpcount<"7F
+		\catcode\the\jv@tmpcount=12
+	\advance\jv@tmpcount by1\repeat
+			% 全文字を非特殊にしてから次の文字を読む
+	\setbox\jv@onecharbox=\hbox{ }\jv@spclen=\the\wd\jv@onecharbox
+	\jv@body
+}
+\def\jv@body#1{%
+	\if#1*\let\jv@next\jv@star
+	\else \def\jv@endchar{#1}\jv@starmodefalse \let\jv@next\jv@lmain
+	\fi \jv@next
+}
+\def\jv@star#1{\def\jv@endchar{#1}\jv@starmodetrue \jv@lmain}
+\def\jv@lmain#1{%
+	\def\jv@curchar{#1}\ifx\jv@curchar\jv@endchar
+		\let\jv@next\endgroup
+	\else
+		\ifdim\jv@spclen=\the\wd\jv@onecharbox
+			\setbox\jv@onecharbox=\hbox{#1}%
+			\ifdim\jv@spclen=\the\wd\jv@onecharbox \relax
+			\else\hskip0pt \fi
+		\else
+			\setbox\jv@onecharbox=\hbox{#1}%
+			\ifdim\jv@spclen=\the\wd\jv@onecharbox \hskip0pt\fi
+		\fi
+		\ifx\jv@curchar\jv@rawspc
+			\ifnum\jv@curcol=0 \hskip0pt\fi
+			% \hbox{}だと行頭で使った場合に余計に改行が入る?
+			\ifjv@starmode #1\else\hbox{}\hskip\jv@spclen\fi
+			% 単なる空白だと「:」の直後の空白が空き過ぎる
+			% (jverbatim環境の方は大丈夫。なぜ?)
+			% \hbox{ }だと途中での改行ができず不便
+		\else
+			\ifjvusejisroman
+				\ifx\jv@curchar\jv@rawbksl \jv@yen
+				\else \ifx\jv@curchar\jv@rawtld \jv@ovl
+				\else #1\fi\fi
+			\else
+				#1%
+			\fi
+		\fi \let\jv@next\jv@lmain
+	\fi \jv@curcol=1\jv@next
+}
+%-----------
+\ifx\jv@insty\undefined \makeatother \fi

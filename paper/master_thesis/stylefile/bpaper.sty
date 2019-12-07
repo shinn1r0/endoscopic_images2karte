@@ -1,0 +1,175 @@
+%
+% 卒論用のスタイルファイル 
+%
+% 1992 YOSHIZAWA Bachelar Ken'ichiro
+% 1993 MORI Toshinori
+% 1994 INOUE TAMO Yasuhiko ver??.00
+% 1996 OSANA TeX-Lover Yuko ver 0.1
+% 1996 KAWANISHI Smoker Hiroyuki ver 0.01
+% 1997 OSANA
+% 2010 HASEGAWA BibTeX-Lover Hiroaki
+
+%
+% ページスタイルの変更
+%
+% 12pt Large \baselineskip 22pt ---> 23pt
+%\baselineskip 23pt
+%\baselineskip=40pt
+
+%
+%\large
+\addtolength{\footskip}{7mm}
+\addtolength{\topskip}{7mm}
+\addtolength{\topmargin}{5mm}
+%\setlength{\textwidth}{24zw}
+\setlength{\textwidth}{38zw}
+\setlength{\textheight}{22.5cm}
+\addtolength{\oddsidemargin}{1.2cm}
+\def\baselinestretch{1.3}
+%
+\setlength{\parindent}{1zw}
+%
+% フォントの定義 (zwのため)
+%
+\Large
+%%%
+%%%     \thsstitle{題目}{指導教授}{学習指導副主任}{年度}{学籍番号}{名前}
+%%%
+\newcommand{\thesis}[7]{       %% description
+\thispagestyle{empty}
+\begin{center}                 %% centering
+\vspace*{0mm}
+\Large                         %% header
+-論文題目-\\              %%
+ \vspace{6mm}                  %%
+\renewcommand{\baselinestretch}{1.0} \selectfont
+ {\Huge #1 \\ }                %% 引数#1:{題目}
+\renewcommand{\baselinestretch}{1.3} \selectfont
+ \vspace{3mm}                 %%
+\renewcommand{\baselinestretch}{1.0} \selectfont
+ {\Large #2 \\ }                %% 引数#2:{英語題目}
+\renewcommand{\baselinestretch}{1.3} \selectfont
+ \vspace{13mm}                 %%
+ 指導教授 \\                   %%
+ \vspace{2mm}                  %%
+ { \LARGE #3} \\               %% 引数#3:{指導教授}
+ \vspace{0.5cm}                %%
+ 学習指導副主任 \\             %%
+ \vspace{2mm}                  %%
+ {\LARGE #4} \\                %% 引数#4:{学習指導副主任}
+ \vspace{18mm}                 %%
+ 慶應義塾大学\ 理工学部\ 情報工学科 \\%%
+ \vspace{2mm}                  %%
+ 平成 #5 年度 \\               %% 引数#5:{卒業年度}
+ \vspace{3mm}                  %%
+ #6 \\                         %% 引数#6:{学籍番号}
+ \vspace{4mm}                  %%
+ { \Huge #7}                   %% 引数#7:{氏名}
+\end{center}
+}                              %% end
+%
+% 目次コマンドの定義
+%
+\newcommand{\contents}{%
+ {\newpage\setcounter{enumi}{\value{page}}
+  \setcounter{page}{1}
+  \renewcommand{\thepage}{--\roman{page}--}
+  \tableofcontents\newpage}
+%  \setcounter{page}{\value{enumi}}}
+  \setcounter{page}{1}}
+%
+% 「あらまし」の再定義
+%
+\def\abstract{\chapter*{あらまし}
+\addcontentsline{toc}{chapter}{あらまし}}
+%
+% chapter --> 「第...章」
+%
+\def\@chapapp{第}
+\def\@afterchapapp{章}
+%
+\def\@makechapterhead#1{ \vspace*{20pt} { \parindent 0pt \raggedright
+ \ifnum \c@secnumdepth >\m@ne \LARGE\bf \@chapapp{} \thechapter \@afterchapapp{} \par
+ \vskip 20pt \fi \LARGE \bf #1\par
+ \nobreak \vskip 40pt } %
+\pagestyle{fancyplain}\lfoot{}\cfoot{}\rhead{}
+\lhead{\small \gt #1~~}\chead{} \rhead{\thepage}}
+%
+\def\@makeschapterhead#1{ \vspace*{20pt} { \parindent 0pt \raggedright
+ \LARGE \bf #1\par
+ \nobreak \vskip 40pt } }
+%
+% キャプションの:を取る。
+%
+\long\def\@makecaption#1#2{
+ \vskip 10pt
+% \setbox\@tempboxa\hbox{#1: #2}
+ \setbox\@tempboxa\hbox{#1 #2}
+ \ifdim \wd\@tempboxa >\hsize \unhbox\@tempboxa\par \else \hbox
+to\hsize{\hfil\box\@tempboxa\hfil}
+ \fi}
+%
+% Figure: --> 「図 ...」
+% Table: --> 「表 ...」
+%
+%\def\fnum@figure{\Large 図 \thefigure}
+%\def\fnum@table{\Large 表 \thetable}
+\def\fnum@figure{図 \thefigure}
+\def\fnum@table{表 \thetable}
+%
+% 「謝辞」環境の定義
+%
+\def\謝辞{\chapter*{謝辞}
+\pagestyle{fancyplain}\lfoot{}\cfoot{}\rhead{}
+\lhead{\small \gt 謝辞~~}\chead{} \rhead{\thepage}
+\addcontentsline{toc}{chapter}{謝辞}}
+%
+% 「参考文献」の再定義
+%
+\renewcommand{\bibname}{参考文献}
+
+\def\thebibliography#1{\chapter*{参考文献\markboth{関 連 書 籍}{関 連 書 籍}}
+\pagestyle{fancyplain}\lfoot{}\cfoot{}\rhead{}
+\lhead{\small \gt 参考文献~~}\chead{} \rhead{\thepage}
+\list
+ {[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+ \advance\leftmargin\labelsep
+ \usecounter{enumi}}
+ \def\newblock{\hskip .11em plus .33em minus .07em}
+ \addcontentsline{toc}{chapter}{参考文献}
+ \sloppy
+ \sfcode`\.=1000\relax}
+\let\endthebibliography=\endlist
+
+% 複数の文献の引用の定義 \cites
+\def\ccite{\cite} % \cite コマンドの出力を作成.
+\def\@cite#1{{\small[#1]}} % \cite コマンドの出力を作成.
+\def\cites#1#2{\cite{#1}--\cite{#2}} % \cites 複数の文献 
+
+%
+% mathモードを使わないようにしよう。
+%
+%\def\@cite#1{\raisebox{.5zh}{\small[#1]}} % \cite コマンドの出力を作成.
+%
+% 「付録」の再定義
+%
+
+
+\def\appendix{\par
+\newpage
+ \setcounter{chapter}{0}
+ \setcounter{section}{0}
+ \def\@chapapp{付録}
+ \addcontentsline{toc}{chapter}{付録} 
+% \include じゃなくて \input にすること
+% (コマンドラインで jlatex を 3回 ? )
+% それでもだめなら清書時に main.toc 書き換え！
+ \renewcommand{\postchaptername}{}
+ \def\@afterchapapp{}
+ \def\thechapter{\Alph{chapter}}}
+%
+%その他
+%
+\newcommand{\式space}{\hspace{5mm}}
+%%%
+%%%

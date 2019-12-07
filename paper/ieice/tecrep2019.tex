@@ -1,0 +1,272 @@
+% コンパイル方法 
+% pdfpLaTeX->pBibTex->pdfpLaTeX
+
+%%「論文」，「レター」，「レター（C分冊）」，「技術研究報告」などのテンプレート
+%% v3.2 [2019/03/19]
+%% 1. 「論文」
+\documentclass[paper]{ieicej}
+% \documentclass[technicalreport]{ieicej}%研究会フォーマット使用%自分で追加
+\bibliographystyle{junsrt} %reference.bibを読み込むのに必要%自分で追加
+\usepackage{amssymb}%自分で追加
+\usepackage[dvipdfmx]{graphicx}%自分で追加
+\usepackage{subfig}%自分で追加
+\usepackage{comment}%自分で追加
+\def\BibTeX{{\rmfamily B\kern-.05em{\scshape i\kern-.025em b}\kern-.08em
+ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125em X}}%自分で追加
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}               % ベクトル表記（ボールド体）
+\newcommand{\argmax}{\mathop{\rm arg~max}\limits}
+\newcommand{\argmin}{\mathop{\rm arg~min}\limits}
+
+
+%\documentclass[invited]{ieicej}% 招待論文
+%\documentclass[survey]{ieicej}% サーベイ論文
+%\documentclass[comment]{ieicej}% 解説論文
+%\usepackage[dvips]{graphicx}
+%\usepackage[dvipdfmx]{graphicx,xcolor}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{textcomp}
+\usepackage{latexsym}
+%\usepackage[fleqn]{amsmath}
+%\usepackage{amssymb}
+
+\setcounter{page}{1}
+
+\field{}
+\jtitle{内視鏡画像からの簡易カルテ自動生成システム}
+\etitle{An Automatic Creation Support System for \\Draft of Medical Chart from Endoscopic Images}
+\authorlist{%
+ \authorentry{}{}{}\MembershipNumber{}
+ %\authorentry{和文著者名}{英文著者名}{所属ラベル}\MembershipNumber{}
+ %\authorentry[メールアドレス]{和文著者名}{英文著者名}{所属ラベル}\MembershipNumber{}
+ %\authorentry{和文著者名}{英文著者名}{所属ラベル}[現在の所属ラベル]\MembershipNumber{}
+ \authorentry[naito@soft.ics.keio.ac.jp]{内藤 慎一郎}{Shinichiro Naito}{Keio}\MembershipNumber{}
+ \authorentry[hagiwara@keiojp]{萩原 将文}{Masafumi Hagiwara}{Keio}\MembershipNumber{}
+}
+\affiliate[Keio]{慶應義塾大学大学院理工学研究科, 〒223--8522 神奈川県横浜市港北区日吉3-14-1}{Graduate School of Science and Technology, Keio University, Hiyoshi 3--14--1, Kouhoku-ku, Kanagawa, 223--8522 Japan}
+%\affiliate[所属ラベル]{和文所属}{英文所属}
+%\paffiliate[]{}
+%\paffiliate[現在の所属ラベル]{和文所属}
+
+\begin{document}
+\begin{abstract}
+%和文あらまし 500字以内
+\input{0_jabstract}
+\end{abstract}
+\begin{keyword}
+%和文キーワード 4〜5語
+医療分野、作業自動化、画像認識、異常検知、マルチラベル学習
+\end{keyword}
+\begin{eabstract}
+%英文アブストラクト 100 words
+\input{0_eabstract}
+
+\end{eabstract}
+\begin{ekeyword}
+%英文キーワード
+medical domain, automatic creation, image recognition, anomaly detection, multi label learning
+\end{ekeyword}
+\maketitle
+
+\input{1_introduction}
+\input{2_related_works}
+\input{3_proposed_model}
+\input{4_experiments}
+\input{5_discussion}
+\input{6_conclusion}
+\bibliography{./reference/reference}
+
+
+% \ack %% 謝辞
+
+%\bibliographystyle{sieicej}
+%\bibliography{myrefs}
+% \begin{thebibliography}{99}% 文献数が10未満の時 {9}
+% \bibitem{}
+% \end{thebibliography}
+
+% \appendix
+% \section{}
+
+\begin{biography}
+% \profile{}{}{}
+%\profile{会員種別}{名前}{紹介文}% 顔写真あり
+%\profile*{会員種別}{名前}{紹介文}% 顔写真なし
+\profile*{n}{内藤 慎一郎}{2018慶大理工情報卒．現在同大大学院修士課程在学中．ニューラルネットワークに関する研究に従事．}
+\profile*{m}{萩原 将文}{1982年慶大・工・電気卒．1987年同大学院博士課程修了．工博．同年同大助手．現在，同大教授．1991-92年度スタンフォード大学訪問研究員．視覚・言語・感性情報処理とその融合の研究に従事．1990年IEEE Consumer Electronics Society論文賞，1996年日本ファジィ学会著述賞，2004年，2014年日本感性工学会論文賞，2013年日本神経回路学会最優秀研究賞，2018年日本知能情報ファジィ学会論文賞受賞．}
+\end{biography}
+
+\end{document}
+
+
+
+%% 2. 「レター」
+\documentclass[letter]{ieicej}
+%\usepackage[dvips]{graphicx}
+%\usepackage[dvipdfmx]{graphicx,xcolor}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{textcomp}
+\usepackage{latexsym}
+%\usepackage[fleqn]{amsmath}
+%\usepackage{amssymb}
+
+\setcounter{page}{1}
+
+\typeofletter{研究速報}
+%\typeofletter{紙上討論}
+%\typeofletter{問題提起}
+%\typeofletter{ショートノート}
+\field{}
+\jtitle{}
+\etitle{}
+\authorlist{%
+ \authorentry{}{}{}{}\MembershipNumber{}
+ %\authorentry{和文著者名}{英文著者名}{会員種別}{所属ラベル}\MembershipNumber{}
+ %\authorentry{和文著者名}{英文著者名}{会員種別}{所属ラベル}[現在の所属ラベル]\MembershipNumber{}
+}
+\affiliate[]{}{}
+%\affiliate[所属ラベル]{和文所属}{英文所属}
+%\paffiliate[]{}
+%\paffiliate[現在の所属ラベル]{和文所属}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+%和文あらまし 120字以内
+\end{abstract}
+\begin{keyword}
+%和文キーワード 4〜5語
+\end{keyword}
+\begin{eabstract}
+%英文アブストラクト 50 words
+\end{eabstract}
+\begin{ekeyword}
+%英文キーワード
+\end{ekeyword}
+
+% \section{まえがき}
+
+
+% \ack %% 謝辞
+
+%\bibliographystyle{sieicej}
+%\bibliography{myrefs}
+% \begin{thebibliography}{99}% 文献数が10未満の時 {9}
+% \bibitem{}
+% \end{thebibliography}
+
+% \appendix
+% \section{}
+
+\end{document}
+
+
+%% 3. 「レター（C分冊）」
+\documentclass[electronicsletter]{ieicej}
+%\usepackage[dvips]{graphicx}
+%\usepackage[dvipdfmx]{graphicx,xcolor}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{textcomp}
+\usepackage{latexsym}
+%\usepackage[fleqn]{amsmath}
+%\usepackage{amssymb}
+
+\setcounter{page}{1}
+
+\field{}
+\jtitle{}
+\etitle{}
+\authorlist{%
+ \authorentry{}{}{}{}\MembershipNumber{}
+ %\authorentry{和文著者名}{英文著者名}{会員種別}{所属ラベル}\MembershipNumber{}
+ %\authorentry{和文著者名}{英文著者名}{会員種別}{所属ラベル}[現在の所属ラベル]\MembershipNumber{}
+}
+\affiliate[]{}{}
+%\affiliate[所属ラベル]{和文所属}{英文所属}
+%\paffiliate[]{}
+%\paffiliate[現在の所属ラベル]{和文所属}
+
+\begin{document}
+\begin{abstract}
+%和文あらまし 120字以内
+\end{abstract}
+\begin{keyword}
+%和文キーワード 4〜5語
+\end{keyword}
+\begin{eabstract}
+%英文アブストラクト 50 words
+\end{eabstract}
+\begin{ekeyword}
+%英文キーワード
+\end{ekeyword}
+\maketitle
+
+\section{まえがき}
+
+
+\ack %% 謝辞
+
+%\bibliographystyle{sieicej}
+%\bibliography{myrefs}
+\begin{thebibliography}{99}% 文献数が 10 未満の時 {9}
+\bibitem{}
+\end{thebibliography}
+
+\appendix
+\section{}
+
+\end{document}
+
+
+
+%% 4. 「技術研究報告」
+\documentclass[technicalreport]{ieicej}
+%\usepackage[dvips]{graphicx}
+%\usepackage[dvipdfmx]{graphicx,xcolor}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{textcomp}
+\usepackage{latexsym}
+%\usepackage[fleqn]{amsmath}
+%\usepackage{amssymb}
+
+\jtitle{}
+\jsubtitle{}
+\etitle{}
+\esubtitle{}
+\authorlist{%
+ \authorentry[]{}{}{}
+% \authorentry[メールアドレス]{和文著者名}{英文著者名}{所属ラベル}
+}
+\affiliate[]{}{}
+%\affiliate[所属ラベル]{和文勤務先\\ 連絡先住所}{英文勤務先\\ 英文連絡先住所}
+
+\begin{document}
+\begin{jabstract}
+%和文あらまし
+\end{jabstract}
+\begin{jkeyword}
+%和文キーワード
+\end{jkeyword}
+\begin{eabstract}
+%英文アブストラクト
+\end{eabstract}
+\begin{ekeyword}
+%英文キーワード
+\end{ekeyword}
+\maketitle
+
+\section{はじめに}
+
+
+%\bibliographystyle{sieicej}
+%\bibliography{myrefs}
+\begin{thebibliography}{99}% 文献数が10未満の時 {9}
+\bibitem{}
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,352 @@
+%--------------------------------------------------------------%
+%   Style File for Japan Society for Fuzzy Theory			   %
+%					 			and intelligent informatics	   %
+%	at Inteligent System Design Laboratory, Doshisha Univ.	   %
+%   Designed by  LaTeX Team (Satoshi IKEDA/ikeda8@mikilab) %
+%--------------------------------------------------------------%
+%   $Id: fuzzy.sty,v 1.1.1.1 2005/12/19 10:08:08 ikeda Exp $
+%--------------------------------------------------------------%
+
+\usepackage{mikibase}
+
+\topmargin=-1cm
+\headheight=0cm
+\headsep=1cm  \footskip=1cm
+\oddsidemargin=-0.5cm  \evensidemargin=0cm
+%\textheight=22.5cm  \textwidth=16cm
+\columnsep=1.0cm
+\setlength{\textwidth}{50zw}
+\setlength{\textheight}{47\baselineskip}
+\long\def\@makefntext#1{\parindent 1em\noindent%
+\hbox to 2em{\hss$^{\@thefnmark}$~}%
+\@tempdima\columnwidth\advance\@tempdima-2em
+\parbox[t]{\@tempdima}{#1}}
+
+
+
+
+%--------------------------------------------------------------
+% 表紙用コマンドの定義
+%--------------------------------------------------------------
+\newenvironment{toppage}
+{
+	\begin{center}
+	\topmargin=2cm
+	\headheight=0cm
+	\headsep=1cm  \footskip=1cm
+	\oddsidemargin=-0.5cm  \evensidemargin=0cm
+	\textheight=22.5cm  \textwidth=16cm
+	\columnsep=1.0cm
+	\end{center}
+}
+
+
+\def\title#1#2#3{
+	\vspace{5cm}
+	{\Huge #1\\}
+	\vspace{1cm}
+	{\Large #2}
+	\vspace{#3cm}
+	\newpage
+}
+
+
+
+
+
+%--------------------------------------------------------------
+% 2ページ目用コマンドの定義（著者名，所属，所在地，および英訳）
+%--------------------------------------------------------------
+\newenvironment{secondpage}
+{
+	\begin{center}
+	\topmargin=2cm
+	\headheight=0cm
+	\headsep=1cm  \footskip=1cm
+	\oddsidemargin=-0.5cm  \evensidemargin=0cm
+	\textheight=22.5cm  \textwidth=16cm
+	\columnsep=1.0cm
+	\end{center}
+	
+}
+
+
+%--------------------------------------------------------------
+%名前の定義
+%--------------------------------------------------------------
+\newenvironment{authors}{\Large}{\medskip}
+\newenvironment{eauthors}{}{}
+
+\def\name#1#2{
+\ifnum#1=1
+	#2 $^{\dag}$
+\else
+	\ifnum#1=2
+		#2 $^{\dag\dag}$
+	\else
+		\ifnum#1=3
+			#2  $^{\ddag}$
+		\else
+			#2  $^{\ddag\ddag}$
+		\fi
+	\fi
+\fi
+\vspace{1pt}
+}
+
+
+\def\ename#1#2#3{
+\ifnum#1=1
+	#2{\footnotesize #3} $^{\dag}$
+\else
+	\ifnum#1=2
+		#2{\footnotesize #3} $^{\dag\dag}$
+	\else
+		\ifnum#1=3
+			#2{\footnotesize #3}  $^{\ddag}$
+		\else
+			#2{\footnotesize #3}  $^{\ddag\ddag}$
+		\fi
+	\fi
+\fi
+}
+
+%--------------------------------------------------------------
+%所属
+%--------------------------------------------------------------
+
+\newenvironment{affiliation}{}{}
+\newenvironment{eaffiliation}{}{}
+
+
+\def\aff#1#2{
+\ifnum#1=1
+	$^{\dag}$ #2　%
+\else
+	\ifnum#1=2
+		$^{\dag\dag}$ #2　%
+	\else
+		\ifnum#1=3
+			$^{\ddag}$ #2　%
+		\else
+			$^{\ddag\ddag}$ #2　%
+		\fi
+	\fi
+\fi
+}
+
+
+\def\eaff#1#2{
+\ifnum#1=1
+	$^{\dag}$ #2　%
+\else
+	\ifnum#1=2
+		$^{\dag\dag}$ #2　%
+	\else
+		\ifnum#1=3
+			$^{\ddag}$ #2　%
+		\else
+			$^{\ddag\ddag}$ #2　%
+		\fi
+	\fi
+\fi
+}
+
+
+%--------------------------------------------------------------
+%所在地
+%--------------------------------------------------------------
+
+\newenvironment{address}{}{}
+\newenvironment{eaddress}{}{}
+
+
+\def\add#1{
+	{\small #1}
+}
+
+\def\eadd#1{
+	{\small #1}
+}
+
+%--------------------------------------------------------------
+% 3ページ目用コマンドの定義（日本語の要約とキーワード）
+%--------------------------------------------------------------
+\newenvironment{jabstract}
+{%
+%\thispagestyle{empty}
+\begin{center}%
+\bigskip%
+\begin{minipage}{50zw}%
+{
+	\begin{center}%
+	\Large\bfseries 要約%
+	\end{center}%
+}
+}%
+{%
+\end{minipage}%
+\end{center}%
+}
+
+%--------------------------------------------------------------
+%キーワードの定義
+%--------------------------------------------------------------
+
+%キーワード（日）の定義%
+\def\jkeyword#1{%
+\begin{flushleft}%
+\quad	{\bf キーワード ： }{#1} \\ \bigskip%
+\end{flushleft}%
+
+%\quad	{\bf キーワード ： }{#1} \\ \bigskip%
+%\end{flushleft}%
+}
+
+
+%--------------------------------------------------------------
+% 4ページ目用コマンドの定義（英語の要約とキーワード）
+%--------------------------------------------------------------
+
+%--------------------------------------------------------------
+%abstract環境の再定義
+%--------------------------------------------------------------
+\renewenvironment{abstract}
+{
+%\thispagestyle{empty}
+\begin{center}%
+\bigskip
+\begin{minipage}{15.8cm}
+{
+	\begin{center}
+	\Large\bfseries Abstract%
+	\end{center}%
+}
+}%
+{%
+\end{minipage}%
+\end{center}%
+}
+
+%キーワード（英）の定義%
+\def\keyword#1{%
+\begin{flushleft}%
+\quad	{\bf Key words ： }{#1} \\ \medskip %
+\end{flushleft}%
+}
+
+
+
+
+
+
+
+%----------------------------------------------------------------------
+% 目次用コマンドの定義
+%----------------------------------------------------------------------
+
+
+%sectionの再定義%
+
+\renewcommand{\section}{%
+	\@startsection{section}{1}{\z@}%
+	{.3\Cvs \@plus.8\Cdp \@minus.2 \Cdp}%
+	{.1\Cvs \@plus.3\Cdp}%
+	{\reset@font\bfseries\large}}
+
+%subsectionの再定義%
+
+\renewcommand{\subsection}{%
+	\@startsection{subsection}{1}{\z@}%
+	{.2\Cvs \@plus.5\Cdp \@minus.2 \Cdp}%
+	{.1\Cvs \@plus.3\Cdp}%
+	{\reset@font\bfseries}}
+
+
+\renewcommand{\subsubsection}{%
+	\@startsection{subsubsection}{1}{\z@}%
+	{.1\Cvs \@plus.5\Cdp \@minus.2 \Cdp}%
+	{.1\Cvs \@plus.3\Cdp}%
+	{\reset@font\bfseries}}
+
+%\renewcommand{\thesection}{\@Roman\c@section}%
+
+
+
+\def\initialize{
+\newpage
+}
+
+
+\def\tbcaption{\def\@captype{table}\caption}
+\def\fgcaption{\def\@captype{figure}\caption}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%--------------------------------------------------------------
+%タイトルの定義
+%--------------------------------------------------------------
+\def\jtitle#1{
+	{\huge
+	{\bf #1}
+	}\bigskip
+}
+
+\def\etitle#1{
+	\vspace{1cm}
+	{\huge
+	{\bf #1}
+	}\bigskip
+}
+
+
+
+
+%--------------------------------------------------------------
+%引用記号の再定義
+%--------------------------------------------------------------
+%LaTeX階梯　p.206
+
+\def\@biblabel#1{[#1]}
+%\def\@biblabel#1{#1)}
+%\def\@cite#1#2{{$^{\mbox{\scriptsize $#1$}}$%
+%	\if@tempswa , #2\fi}$^{\mbox{\scriptsize $)$}}$ }
+
+
+
+%--------------------------------------------------------------
+%キャプションの：を削除．図をFig,表をTableに
+%--------------------------------------------------------------
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \iftdir\sbox\@tempboxa{#1\hskip1zw#2}%
+    \else\sbox\@tempboxa{#1\hskip1zw #2}%
+  \fi
+  \ifdim \wd\@tempboxa >\hsize
+    \iftdir #1\hskip1zw#2\relax\par
+      \else #1\hskip1zw #2\relax\par\fi
+  \else
+    \global \@minipagefalse
+    \hbox to\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\tablename}{Table}
+
+
+
+%--------------------------------------------------------------
+%図表及び数式の参照方法を定義
+%--------------------------------------------------------------
+\def\fgref#1{\figurename\hskip1ex \ref{#1}}
+\def\tbref#1{\tablename\hskip1ex \ref{#1}}
+\def\eqref#1{ョ(\ref{#1})}
+
+
+
+%--------------------------------------------------------------
+%最終ページの表記変更
+%--------------------------------------------------------------
+\def\ps@lastpage{\let\@mkboth\@gobbletwo
+\def\@oddhead{} \def\@oddfoot{\hfil\thepage」\hfil}
+\def\@evenhead{} \def\@evenfoot{\thepage」}}

@@ -1,0 +1,168 @@
+%
+% 修論用のスタイルファイル 
+%
+% 1992 YOSHIZAWA Bachelar Ken'ichiro
+% 1993 MORI Toshinori
+% 1994 INOUE TAMO Yasuhiko ver??.00
+% 1996 OSANA TeX-Lover Yuko ver 0.1
+% 1996 KAWANISHI Smoker Hiroyuki ver 0.01
+% 1997 OSANA
+% 2010 HASEGAWA BibTeX-Lover Hiroaki
+% 2012 SAGARA Philip Morris Tsukasa 
+
+\addtolength{\footskip}{7mm}
+\addtolength{\topskip}{7mm}
+\addtolength{\topmargin}{10mm}
+\setlength{\textwidth}{35zw}
+\setlength{\textheight}{22.5cm}
+\def\baselinestretch{1.3}
+\setlength{\parindent}{1zw}
+
+
+%
+% 表紙
+% \thesis{卒業年度}{題目}{名前}{学籍番号}{指導教員}{卒業年}{卒業月}
+%
+\newcommand{\thesis}[7]{
+\thispagestyle{empty}
+{\LARGE 修士論文} \hspace{\fill} {\LARGE #1 年度}
+\vspace{2cm}
+\begin{center}
+{\Huge #2} \\
+\vspace{2cm}
+{\Huge #3} \\
+{\LARGE (学籍番号：#4)} \\
+\vspace{5cm}
+{\LARGE 指導教員　教授　#5} \\
+\vspace{3cm}
+{\Large #6 年 #7 月} \\
+\vspace{1cm}
+{\LARGE 慶應義塾大学大学院理工学研究科} \\
+{\LARGE 開放環境科学専攻} \\
+\end{center}
+}
+
+
+%
+% 目次コマンドの定義
+%
+\newcommand{\contents}{
+ {\newpage\setcounter{enumi}{\value{page}}
+  \tableofcontents\newpage}
+  \setcounter{page}{1}}
+
+
+%
+% 「論文要旨」の定義
+%
+%\def\jabstract{\chapter*{論文要旨}
+% \addcontentsline{toc}{chapter}{論文要旨}}
+%\def\eabstract{\chapter*{Thesis Abstract}
+% \addcontentsline{toc}{chapter}{Thesis Abstract}}
+
+\newcommand{\jabstract}{
+\newpage
+\begin{center}
+\textbf{\LARGE 論文要旨}
+\end{center}
+\vspace{10pt}
+\par
+\addcontentsline{toc}{chapter}{論文要旨}}
+
+\newcommand{\eabstract}[1]{
+\newpage
+\begin{center}
+\textbf{{\LARGE Thesis Abstract} \\
+\vspace{10pt}
+{\large #1}}
+\end{center}
+\vspace{10pt}
+\par
+\addcontentsline{toc}{chapter}{Thesis Abstract}}
+
+
+%
+% chapter --> 「第...章」
+%
+\def\@chapapp{第}
+\def\@afterchapapp{章}
+\def\@makechapterhead#1{ \vspace*{20pt} { \parindent 0pt \raggedright
+ \ifnum \c@secnumdepth >\m@ne \LARGE\bf \@chapapp{} \thechapter \@afterchapapp{} \par
+ \vskip 20pt \fi \LARGE \bf #1\par
+ \nobreak \vskip 40pt } %
+\pagestyle{fancyplain}\lfoot{}\cfoot{}\rhead{}
+\lhead{\small \gt #1~~}\chead{} \rhead{\thepage}}
+\def\@makeschapterhead#1{ \vspace*{20pt} { \parindent 0pt \raggedright
+ \LARGE \bf #1\par
+ \nobreak \vskip 40pt }}
+
+
+%
+% キャプションの:を取る。
+%
+\long\def\@makecaption#1#2{
+ \vskip 10pt
+ \setbox\@tempboxa\hbox{#1 #2}
+ \ifdim \wd\@tempboxa >\hsize \unhbox\@tempboxa\par \else \hbox
+to\hsize{\hfil\box\@tempboxa\hfil}
+ \fi}
+
+
+%
+% Figure: --> 「図 ...」
+% Table: --> 「表 ...」
+%
+\def\fnum@figure{図 \thefigure}
+\def\fnum@table{表 \thetable}
+
+%
+% 「謝辞」環境の定義
+%
+\def\acknowledgment{\chapter*{謝辞}
+\pagestyle{fancyplain}\lfoot{}\cfoot{}\rhead{}
+\lhead{\small \gt 謝辞~~}\chead{} \rhead{\thepage}
+\addcontentsline{toc}{chapter}{謝辞}}
+
+
+%
+% 「参考文献」の再定義
+%
+\renewcommand{\bibname}{参考文献}
+
+\def\thebibliography#1{\chapter*{参考文献\markboth{関 連 書 籍}{関 連 書 籍}}
+\pagestyle{fancyplain}\lfoot{}\cfoot{}\rhead{}
+\lhead{\small \gt 参考文献~~}\chead{} \rhead{\thepage}
+\list
+ {[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+ \advance\leftmargin\labelsep
+ \usecounter{enumi}}
+ \def\newblock{\hskip .11em plus .33em minus .07em}
+ \addcontentsline{toc}{chapter}{参考文献}
+ \sloppy
+ \sfcode`\.=1000\relax}
+\let\endthebibliography=\endlist
+
+
+%
+% 「付録」の再定義
+%
+\def\appendix{\par
+\newpage
+ \setcounter{chapter}{0}
+ \setcounter{section}{0}
+ \def\@chapapp{付録}
+ \addcontentsline{toc}{chapter}{付録} 
+
+
+% \include じゃなくて \input にすること
+% (コマンドラインで jlatex を 3回 ? )
+% それでもだめなら清書時に main.toc 書き換え！
+ \renewcommand{\postchaptername}{}
+ \def\@afterchapapp{}
+ \def\thechapter{\Alph{chapter}}}
+
+
+%
+%その他
+%
+\newcommand{\式space}{\hspace{5mm}}
