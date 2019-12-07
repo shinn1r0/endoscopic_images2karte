@@ -1,4 +1,4 @@
-# images2karte
+# endoscopic_images2karte
 
 ## files
 ├── docker-compose.yml  
@@ -61,6 +61,6 @@
     └── test_path_setting.py  
 
 ## not commited files
-├── data
-├── datasets
-└── outputs
+├── data  
+├── datasets  
+└── outputs  
