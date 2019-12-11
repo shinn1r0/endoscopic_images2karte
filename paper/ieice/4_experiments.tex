@@ -3,7 +3,7 @@
 \subsubsection{モデルの損失関数}
 マルチラベル予測の学習のためバイナリ交差エントロピーを用いた。
 \subsubsection{モデルの最適化手法}
-確率的勾配降下法を拡張したAdaptive Moment Estimation (Adam)を使用した。これは勾配の大きさと更新量によって学習率を変化させていく方法で、様々なタスクで高性能を記録している。
+確率的勾配降下法\cite{SGD}を拡張したAdaptive Moment Estimation (Adam)\cite{Adam}を使用した。これは勾配の大きさと更新量によって学習率を変化させていく方法で、様々なタスクで高性能を記録している。
 \subsubsection{モデルの学習回数とバッチサイズ}
 モデルの学習回数はすべて25にした。これは損失関数の推移から判断した。またバッチサイズはDenseNet121で50、DenseNet161で24、3D-ResNetで3とした。これは使用した計算機のメモリの容量によって決めた。
 \subsection{評価指標}
