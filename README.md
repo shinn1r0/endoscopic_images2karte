@@ -30,7 +30,7 @@
 │   ├── dataset.ipynb  
 │   ├── labels_process.ipynb  
 │   └── pytorch_data_util_practice.ipynb  
-├── images2karte  
+├── endoscopic_images2karte  
 │   ├── data2dataset.py  
 │   ├── dataset.py  
 │   ├── \_\_init__.py  

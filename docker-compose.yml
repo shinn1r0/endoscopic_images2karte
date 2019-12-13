@@ -2,18 +2,18 @@ version: '2.3'
 services:
   data:
     image: busybox
-    container_name: images2karte_data
+    container_name: endoscopic_images2karte_data
     volumes:
-      - "./:/images2karte/"
+      - "./:/endoscopic_images2karte/"
   jupyterlab:
     image: shinn1r0/jupyterlab-gpu
     ports:
       - "8888:8888"
-    container_name: images2karte
+    container_name: endoscopic_images2karte
     runtime: nvidia
     volumes_from:
       - data
-    working_dir: /images2karte
+    working_dir: /endoscopic_images2karte
     privileged: true
     environment:
       TZ: Asia/Tokyo

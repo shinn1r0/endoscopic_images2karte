@@ -10,8 +10,8 @@ from torch.utils.data import DataLoader, random_split
 from torchvision import transforms
 from tqdm import tqdm
 
-from images2karte.dataset import Images2KarteDataset
-from images2karte.models import simple_model2
+from endoscopic_images2karte.dataset import Images2KarteDataset
+from endoscopic_images2karte.models import simple_model2
 
 
 def dataloader(dataset_file, transform, batch_size=1, num_worker=0):
