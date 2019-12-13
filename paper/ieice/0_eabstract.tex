@@ -1,7 +1,8 @@
 In this paper, we devised an automatic creation support system for a draft of medical charts from endoscopic images using a deep learning model.
-Instead of manually labeling each image, which was done in previous research, we created multi-label teacher data using drafts of medical charts actually created by doctors.
-Thereby we succeeded in automating the creation of all learning data. 
-The multi-label data is composed of a value indicating whether the anomaly is detected in the endoscopic images and several labels corresponding to frequently diagnosed disease names.
-Using this learning data, we trained various deep learning models and compared them.
-And some models recorded high predictive performance.
+In previous studies, learning and prediction were performed on an image basis, and prediction on a patient basis was impossible.
+It was a system that could predict only one type of lesion.
+In this study, multi-label teacher data consisting of a label indicating whether one or more lesions exist and a plurality of lesion labels was used.
+This made it possible to predict multiple lesions on a patient basis.
+In addition, in the existing study, label data was manually assigned to all images, whereas in this study, multi-label data was automatically generated from a simple chart actually created by a doctor.
+Using this learning data, we trained and compared several models of 2D and 3D convolutional neural networks. And some models recorded high inference performance.
 We also implemented a function that supports doctors' judgment by generating predictions with multiple reliability levels when generating prediction labels.
