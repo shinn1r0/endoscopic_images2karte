@@ -16,7 +16,7 @@ def pyplot_paper_init():
     plt.rcParams['ytick.direction'] = 'in'
     plt.rcParams['xtick.major.width'] = 1.0
     plt.rcParams['ytick.major.width'] = 1.0
-    plt.rcParams['font.size'] = 8
+    plt.rcParams['font.size'] = 14
     plt.rcParams['axes.linewidth'] = 1.0
 
 
@@ -88,7 +88,7 @@ def graph_plot(mode, results, result_name):
         threshold = np.arange(0.10, 0.91, 0.10)
         ax2 = ax1.twinx()
         ax3 = ax1.twinx()
-        ax3.spines["right"].set_position(("axes", 1.13))
+        ax3.spines["right"].set_position(("axes", 1.30))
         make_patch_spines_invisible(ax3)
         ax3.spines['right'].set_visible(True)
         ax1.set_xlim(0, 1)
@@ -142,6 +142,8 @@ def main(result_dir, mode):
         label_precision_list = np.array([x for i, x in enumerate(train_result_dict['epoch_label_micro_precision_list']) if i % 2 == 1])
         label_recall_list = np.array([x for i, x in enumerate(train_result_dict['epoch_label_micro_recall_list']) if i % 2 == 1])
         label_f1score_list = np.array([x for i, x in enumerate(train_result_dict['epoch_label_micro_f1score_list']) if i % 2 == 1])
+        print(result_dir)
+        print('-' * 100)
         print('acc')
         print(acc_list[max_index])
         print('all_acc')
