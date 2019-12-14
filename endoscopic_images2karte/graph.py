@@ -104,6 +104,10 @@ def graph_plot(mode, results, result_name):
         ax3.plot(threshold, f1score_list * 100, label='F1-Score', color='black', linestyle='-')
         ax3.set_yticks(np.arange(0, 101, 20))
         ax3.set_ylabel('F1-Score (%)')
+        h1, l1 = ax1.get_legend_handles_labels()
+        h2, l2 = ax2.get_legend_handles_labels()
+        h3, l3 = ax3.get_legend_handles_labels()
+        ax1.legend(h1+h2+h3, l1+l2+l3, loc='lower left')
 
     plt.tight_layout()
     plt.savefig('./fig/' + result_name + '.pdf', transparent=True)
