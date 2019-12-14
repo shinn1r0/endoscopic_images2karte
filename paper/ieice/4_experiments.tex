@@ -46,28 +46,86 @@ $F1{\rm \mathchar"712D}Score = \frac{Precision * Recall}{(Precision + Recall) / 
 各画像をマルチラベルと関連付けしたデータセットを用いた。画像をモデルに入力し出力されたマルチラベルと教師データのマルチラベルから損失を計算し最適化を行った。モデルが出力したマルチラベルの各ラベルを二値化する際のしきい値を変化させた。その結果からテスト出力の際のしきい値を決定し、推論を行った。
 
 \subsubsection{実験結果}
-結果を以下に示す。
+結果を表\ref{tb:0}と図\ref{fig:result0}に示す。
+表\ref{tb:0}は検証データを用いた際の予測の結果を示す。
+この表のTotalは図\ref{fig:multilabel}における全てのラベルにおける結果を、LesionとLabelは図\ref{fig:multilabel}のラベルの1番目と2番目以降に分けて計算した結果を示している。
+図\ref{fig:result00}は学習過程での損失とF1-Scoreの推移を示している。
+図\ref{fig:result01}はテスト推論において、モデルが出力したマルチラベルの値を二値化する際のしきい値を変化させた際の、PrecisionとRecallとF1-Scoreの変化を示している。
+
+\begin{table}[tb]
+    \caption[]{DenseNetを用いた内視鏡画像からの\\マルチラベル予測}
+    \label{tb:0}
+    \centering
+    \normalsize
+    \begin{tabular}{c|c|r} \hline
+        Total & Acc (\%) & 92.4 \\ \cline{2-3}
+         & AllAcc (\%) & 32.8 \\ \cline{2-3}
+         & F1-Score (\%) & 73.9 \\ \cline{2-3}
+         & Precision (\%) & 88.8 \\ \cline{2-3}
+         & Recall (\%) & 63.2 \\ \hline
+        Lesion & Acc (\%) & 97.4 \\ \cline{2-3}
+         & F1-Score (\%) & 98.7 \\ \cline{2-3}
+         & Precision (\%) & 98.0 \\ \cline{2-3}
+         & Recall (\%) & 99.4 \\ \hline
+        Label & Acc (\%) & 92.1 \\ \cline{2-3}
+         & AllAcc (\%) & 34.1 \\ \cline{2-3}
+         & F1-Score (\%) & 53.9 \\ \cline{2-3}
+         & Precision (\%) & 78.1 \\ \cline{2-3}
+         & Recall (\%) & 41.2 \\ \hline
+    \end{tabular}
+\end{table}
 \begin{figure}[tb]
     \centering
-        %\subfloat[][学習過程]{\includegraphics[width=70mm]{./fig/sample1.jpg}\label{fig:01}} \quad
-        %\subfloat[][検証結果]{\includegraphics[width=70mm]{./fig/sample2.jpg}\label{fig:02}} \quad
-        %\subfloat[][各しきい値におけるテスト]{\includegraphics[width=70mm]{./fig/sample3.jpg}\label{fig:03}} \quad
+        \subfloat[][学習過程]{\includegraphics[width=80mm]{./fig/result0.png}\label{fig:result00}} \quad
+        %\subfloat[][検証結果]{\includegraphics[width=80mm]{./fig/result0.png}\label{fig:0}} \quad
+        \subfloat[][各しきい値におけるテスト]{\includegraphics[width=80mm]{./fig/result1.png}\label{fig:result01}} \quad
         %\subfloat[][推論結果]{\includegraphics[width=70mm]{./fig/sample4.jpg}\label{fig:04}} \quad
-    \captionsetup{format=plain,font=large,margin=50pt,name=図}
+    \captionsetup{format=plain,font=normalsize,margin=30pt,name=図}
     \caption[]{DenseNetを用いた内視鏡画像からのマルチラベル予測}
+    \label{fig:result0}
 \end{figure}
+
 \subsection{3D-ResNetを用いた内視鏡画像からのマルチラベル予測}
 \subsubsection{実験概要}
 各患者ごとに画像を時間軸で連結した三次元データとマルチラベルと関連付けしたデータセットを用いた。三次元データをモデルに入力し出力されたマルチラベルと教師データのマルチラベルから損失を計算し最適化を行った。モデルが出力したマルチラベルの各ラベルを二値化する際のしきい値を変化させた。その結果からテスト出力の際のしきい値を決定し、推論を行った。
 
 \subsubsection{実験結果}
-結果を以下に示す。
+結果を表\ref{tb:1}と図\ref{fig:result1}に示す。
+表\ref{tb:1}は検証データを用いた際の予測の結果を示す。
+この表のTotalは図\ref{fig:multilabel}における全てのラベルにおける結果を、LesionとLabelは図\ref{fig:multilabel}のラベルの1番目と2番目以降に分けて計算した結果を示している。
+図\ref{fig:result10}は学習過程での損失とF1-Scoreの推移を示している。
+図\ref{fig:result11}はテスト推論において、モデルが出力したマルチラベルの値を二値化する際のしきい値を変化させた際の、PrecisionとRecallとF1-Scoreの変化を示している。
+
+\begin{table}[tb]
+    \caption[]{3D-ResNetを用いた内視鏡画像からのマルチラベル予測}
+    \label{tb:1}
+    \centering
+    \normalsize
+    \begin{tabular}{c|c|r} \hline
+        Total & Acc (\%) & 92.2 \\ \cline{2-3}
+         & AllAcc (\%) & 28.5 \\ \cline{2-3}
+         & F1-Score (\%) & 72.9 \\ \cline{2-3}
+         & Precision (\%) & 86.5 \\ \cline{2-3}
+         & Recall (\%) & 63.0 \\ \hline
+        Lesion & Acc (\%) & 98.8 \\ \cline{2-3}
+         & F1-Score (\%) & 99.4 \\ \cline{2-3}
+         & Precision (\%) & 98.9 \\ \cline{2-3}
+         & Recall (\%) & 99.9 \\ \hline
+        Label & Acc (\%) & 91.7 \\ \cline{2-3}
+         & AllAcc (\%) & 28.9 \\ \cline{2-3}
+         & F1-Score (\%) & 50.8 \\ \cline{2-3}
+         & Precision (\%) & 71.8 \\ \cline{2-3}
+         & Recall (\%) & 39.4 \\ \hline
+    \end{tabular}
+\end{table}
 \begin{figure}[tb]
     \centering
-        %\subfloat[][学習過程]{\includegraphics[width=70mm]{./fig/sample1.jpg}\label{fig:01}} \quad
+        \subfloat[][学習過程]{\includegraphics[width=80mm]{./fig/result2.png}\label{fig:result10}} \quad
         %\subfloat[][検証結果]{\includegraphics[width=70mm]{./fig/sample2.jpg}\label{fig:02}} \quad
-        %\subfloat[][各しきい値におけるテスト]{\includegraphics[width=70mm]{./fig/sample3.jpg}\label{fig:03}} \quad
+        \subfloat[][各しきい値におけるテスト]{\includegraphics[width=80mm]{./fig/result3.png}\label{fig:result11}} \quad
         %\subfloat[][推論結果]{\includegraphics[width=70mm]{./fig/sample4.jpg}\label{fig:04}} \quad
-    \captionsetup{format=plain,font=large,margin=50pt,name=図}
+    \captionsetup{format=plain,font=normalsize,margin=30pt,name=図}
     \caption[]{3D-ResNetを用いた内視鏡画像からのマルチラベル予測}
+    \label{fig:result1}
 \end{figure}
+
