@@ -1,4 +1,4 @@
-<mxfile host="www.draw.io" modified="2019-12-23T06:36:29.615Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36" etag="fk0owtJDvRQ6D-m1UMo4" version="12.4.3" type="github" pages="1">
+<mxfile host="www.draw.io" modified="2019-12-23T06:46:05.951Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36" etag="qquNZJmMFRu2HxhgRZk9" version="12.4.3" type="github" pages="1">
   <diagram id="6vIDgrJOVcS2hu5d1pO0" name="Page-1">
     <mxGraphModel dx="2029" dy="1274" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -40,10 +40,10 @@
         <mxCell id="EpTEvnc-EoDcLgxDVzZk-40" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#330000;" parent="1" vertex="1">
           <mxGeometry x="424.5" y="363" width="10" height="10" as="geometry"/>
         </mxCell>
-        <mxCell id="EpTEvnc-EoDcLgxDVzZk-41" value="&lt;font style=&quot;font-size: 16px&quot;&gt;B&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];;autosize=1;" parent="1" vertex="1">
+        <mxCell id="EpTEvnc-EoDcLgxDVzZk-41" value="&lt;font style=&quot;font-size: 16px&quot;&gt;D&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];;autosize=1;" parent="1" vertex="1">
           <mxGeometry x="179" y="373" width="30" height="20" as="geometry"/>
         </mxCell>
-        <mxCell id="EpTEvnc-EoDcLgxDVzZk-42" value="&lt;font style=&quot;font-size: 16px&quot;&gt;C&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];;autosize=1;" parent="1" vertex="1">
+        <mxCell id="EpTEvnc-EoDcLgxDVzZk-42" value="&lt;font style=&quot;font-size: 16px&quot;&gt;E&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];;autosize=1;" parent="1" vertex="1">
           <mxGeometry x="331" y="363" width="30" height="20" as="geometry"/>
         </mxCell>
         <mxCell id="EpTEvnc-EoDcLgxDVzZk-43" value="&lt;font style=&quot;font-size: 16px&quot;&gt;A&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];;autosize=1;" parent="1" vertex="1">
@@ -55,8 +55,8 @@
         <mxCell id="EpTEvnc-EoDcLgxDVzZk-45" value="&lt;font style=&quot;font-size: 16px&quot;&gt;A&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];;autosize=1;" parent="1" vertex="1">
           <mxGeometry x="519.5" y="383" width="30" height="20" as="geometry"/>
         </mxCell>
-        <mxCell id="EpTEvnc-EoDcLgxDVzZk-47" value="&lt;font style=&quot;font-size: 20px&quot;&gt;Lesions&lt;br&gt;A, B, C&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];;autosize=1;strokeColor=#000000;" parent="1" vertex="1">
-          <mxGeometry x="79.5" y="474" width="90" height="50" as="geometry"/>
+        <mxCell id="EpTEvnc-EoDcLgxDVzZk-47" value="&lt;font style=&quot;font-size: 20px&quot;&gt;Lesions&lt;br&gt;A, D, E&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];;autosize=1;strokeColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="79.5" y="475" width="90" height="50" as="geometry"/>
         </mxCell>
         <mxCell id="EpTEvnc-EoDcLgxDVzZk-48" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;dashed=1;perimeterSpacing=10;" parent="1" vertex="1">
           <mxGeometry x="40" y="580" width="630" height="95" as="geometry"/>
