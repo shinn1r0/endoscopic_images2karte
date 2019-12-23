@@ -24,6 +24,9 @@
 !/paper/ieice/*.tex
 !/paper/ieice/*.cls
 !/paper/ieice/*.bst
+!/paper/ieice/draw.io
+!/paper/ieice/fig
+!/paper/ieice/reference
 
 ### JupyterNotebook ###
 .ipynb_checkpoints
