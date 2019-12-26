@@ -1,11 +1,12 @@
 \section{まえがき}
 
 \begin{figure}[b]
-    \begin{center}
-        \includegraphics[width=80mm]{./fig/0.png}
-        \caption{Overview}
-        \label{fig:overview}
-    \end{center}
+    \centering
+        \subfloat[][Conventional Method (diagnose only for Lesion A)]{\includegraphics[width=80mm]{./fig/ieice0_0.png}\label{fig:overview0}} \quad
+        \subfloat[][Proposed Method (diagnose many lesions sucha as A,B,etc.)]{\includegraphics[width=80mm]{./fig/ieice0_1.png}\label{fig:overview1}} \quad
+    \captionsetup{format=plain,font=normalsize,margin=30pt,name=図}
+    \caption[]{Overview}
+    \label{fig:overview}
 \end{figure}
 
 現在機械学習の分野において深層学習による画像処理\cite{CNN,AlexNet,VGG,ResNet}、系列データ処理\cite{RNN,GRU,LSTM,Transformer}が高い精度を記録している。このため文字や画像や音声などの認識\cite{DL_LVCSR,ImageNet}や生成\cite{GAN,VAE}、翻訳\cite{Transformer,Seq2Seq,effective_attention}や検索\cite{anxious_learning}といった自然言語処理に幅広く用いられるようになっている。また化合物の性質予測\cite{Chemistry1,Chemistry2}やゲノム構造の解析\cite{Genomics}、株価の予測\cite{stock_prediction}のように、生物学や化学や経済学などの情報工学分野を超えた様々な分野においても用いられてきている。

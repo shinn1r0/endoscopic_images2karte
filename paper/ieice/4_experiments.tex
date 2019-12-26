@@ -46,11 +46,11 @@ $F1{\rm \mathchar"712D}Score = \frac{Precision * Recall}{(Precision + Recall) / 
 各画像をマルチラベルと関連付けしたデータセットを用いた。画像をモデルに入力し出力されたマルチラベルと教師データのマルチラベルから損失を計算し最適化を行った。モデルが出力したマルチラベルの各ラベルを二値化する際のしきい値を変化させた。その結果からテスト出力の際のしきい値を決定し、推論を行った。
 
 \subsubsection{実験結果}
-結果を表\ref{tb:0}と図\ref{fig:result0}に示す。
+結果を表\ref{tb:0}と図\ref{fig:densenet_result}に示す。
 表\ref{tb:0}は検証データを用いた際の予測の結果を示す。
 この表のTotalは図\ref{fig:multilabel}における全てのラベルにおける結果を、LesionとLabelは図\ref{fig:multilabel}のラベルの1番目と2番目以降に分けて計算した結果を示している。
-図\ref{fig:result00}は学習過程での損失とF1-Scoreの推移を示している。
-図\ref{fig:result01}はテスト推論において、モデルが出力したマルチラベルの値を二値化する際のしきい値を変化させた際の、PrecisionとRecallとF1-Scoreの変化を示している。
+図\ref{fig:densenet_result_process}は学習過程での損失とF1-Scoreの推移を示している。
+図\ref{fig:densenet_result_threshold}はテスト推論において、モデルが出力したマルチラベルの値を二値化する際のしきい値を変化させた際の、PrecisionとRecallとF1-Scoreの変化を示している。
 
 \begin{table}[tb]
     \caption[]{DenseNetを用いた内視鏡画像からの\\マルチラベル予測}
@@ -76,13 +76,13 @@ $F1{\rm \mathchar"712D}Score = \frac{Precision * Recall}{(Precision + Recall) / 
 \end{table}
 \begin{figure}[tb]
     \centering
-        \subfloat[][学習過程]{\includegraphics[width=80mm]{./fig/result0.png}\label{fig:result00}} \quad
+        \subfloat[][学習過程]{\includegraphics[width=80mm]{./fig/densenet121_e_p02process.png}\label{fig:densenet_result_process}} \quad
         %\subfloat[][検証結果]{\includegraphics[width=80mm]{./fig/result0.png}\label{fig:0}} \quad
-        \subfloat[][各しきい値におけるテスト]{\includegraphics[width=80mm]{./fig/result1.png}\label{fig:result01}} \quad
+        \subfloat[][各しきい値におけるテスト]{\includegraphics[width=80mm]{./fig/densenet121_e_p02threshold.png}\label{fig:densenet_result_threshold}} \quad
         %\subfloat[][推論結果]{\includegraphics[width=70mm]{./fig/sample4.jpg}\label{fig:04}} \quad
     \captionsetup{format=plain,font=normalsize,margin=30pt,name=図}
     \caption[]{DenseNetを用いた内視鏡画像からのマルチラベル予測}
-    \label{fig:result0}
+    \label{fig:densenet_result}
 \end{figure}
 
 \subsection{3D-ResNetを用いた内視鏡画像からのマルチラベル予測}
@@ -90,11 +90,11 @@ $F1{\rm \mathchar"712D}Score = \frac{Precision * Recall}{(Precision + Recall) / 
 各患者ごとに画像を時間軸で連結した三次元データとマルチラベルと関連付けしたデータセットを用いた。三次元データをモデルに入力し出力されたマルチラベルと教師データのマルチラベルから損失を計算し最適化を行った。モデルが出力したマルチラベルの各ラベルを二値化する際のしきい値を変化させた。その結果からテスト出力の際のしきい値を決定し、推論を行った。
 
 \subsubsection{実験結果}
-結果を表\ref{tb:1}と図\ref{fig:result1}に示す。
+結果を表\ref{tb:1}と図\ref{fig:resnet_result}に示す。
 表\ref{tb:1}は検証データを用いた際の予測の結果を示す。
 この表のTotalは図\ref{fig:multilabel}における全てのラベルにおける結果を、LesionとLabelは図\ref{fig:multilabel}のラベルの1番目と2番目以降に分けて計算した結果を示している。
-図\ref{fig:result10}は学習過程での損失とF1-Scoreの推移を示している。
-図\ref{fig:result11}はテスト推論において、モデルが出力したマルチラベルの値を二値化する際のしきい値を変化させた際の、PrecisionとRecallとF1-Scoreの変化を示している。
+図\ref{fig:resnet_result_process}は学習過程での損失とF1-Scoreの推移を示している。
+図\ref{fig:resnet_result_threshold}はテスト推論において、モデルが出力したマルチラベルの値を二値化する際のしきい値を変化させた際の、PrecisionとRecallとF1-Scoreの変化を示している。
 
 \begin{table}[tb]
     \caption[]{3D-ResNetを用いた内視鏡画像からのマルチラベル予測}
@@ -120,12 +120,12 @@ $F1{\rm \mathchar"712D}Score = \frac{Precision * Recall}{(Precision + Recall) / 
 \end{table}
 \begin{figure}[tb]
     \centering
-        \subfloat[][学習過程]{\includegraphics[width=80mm]{./fig/result2.png}\label{fig:result10}} \quad
+        \subfloat[][学習過程]{\includegraphics[width=80mm]{./fig/resnet3dprocess.png}\label{fig:resnet_result_process}} \quad
         %\subfloat[][検証結果]{\includegraphics[width=70mm]{./fig/sample2.jpg}\label{fig:02}} \quad
-        \subfloat[][各しきい値におけるテスト]{\includegraphics[width=80mm]{./fig/result3.png}\label{fig:result11}} \quad
+        \subfloat[][各しきい値におけるテスト]{\includegraphics[width=80mm]{./fig/resnet3dthreshold.png}\label{fig:resnet_result_threshold}} \quad
         %\subfloat[][推論結果]{\includegraphics[width=70mm]{./fig/sample4.jpg}\label{fig:04}} \quad
     \captionsetup{format=plain,font=normalsize,margin=30pt,name=図}
     \caption[]{3D-ResNetを用いた内視鏡画像からのマルチラベル予測}
-    \label{fig:result1}
+    \label{fig:resnet_result}
 \end{figure}
 
