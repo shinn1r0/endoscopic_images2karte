@@ -21,6 +21,7 @@
 !/paper/master_thesis/document
 !/paper/ieice/
 /paper/ieice/*
+!/paper/ieice/*.pdf
 !/paper/ieice/*.tex
 !/paper/ieice/*.cls
 !/paper/ieice/*.bst
