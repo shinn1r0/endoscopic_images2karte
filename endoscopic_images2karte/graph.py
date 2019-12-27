@@ -58,7 +58,7 @@ def graph_plot(mode, results, result_name):
         ax2.plot(val_f1score_list * 100, label='Validation F1-Score', color='red', linestyle='-')
 
         ax1.set_xlim(0, 30)
-        ax1.set_xlabel('epoch')
+        ax1.set_xlabel('学習回数    [epoch]')
 
         ax1.set_ylim(0, 0.30)
         ax1.set_yticks(np.arange(0, 0.31, 0.05))
@@ -66,7 +66,7 @@ def graph_plot(mode, results, result_name):
 
         ax2.set_ylim(50, 100)
         ax2.set_yticks(np.arange(50, 101, 10))
-        ax2.set_ylabel('F1-Score (%)')
+        ax2.set_ylabel('F1-Score    [%]')
 
         h1, l1 = ax1.get_legend_handles_labels()
         h2, l2 = ax2.get_legend_handles_labels()
