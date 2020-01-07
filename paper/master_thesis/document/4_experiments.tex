@@ -236,25 +236,116 @@ $F1{\rm \mathchar"712D}Score = \frac{Precision * Recall}{(Precision + Recall) / 
 \end{table}
 
 \begin{table}[tb]
-    \caption[]{3D-ResNetを用いた内視鏡画像からのマルチラベル予測}
-    \label{tb:1}
+    \caption[]{DenseNetを用いた内視鏡画像からの\\マルチラベル予測}
+    \label{tb:densenet161}
     \centering
     \normalsize
     \begin{tabular}{c|c|r} \hline
-        Total & Acc (\%) & 92.2 \\ \cline{2-3}
-         & AllAcc (\%) & 28.5 \\ \cline{2-3}
-         & F1-Score (\%) & 72.9 \\ \cline{2-3}
-         & Precision (\%) & 86.5 \\ \cline{2-3}
-         & Recall (\%) & 63.0 \\ \hline
-        Lesion & Acc (\%) & 98.8 \\ \cline{2-3}
-         & F1-Score (\%) & 99.4 \\ \cline{2-3}
-         & Precision (\%) & 98.9 \\ \cline{2-3}
-         & Recall (\%) & 99.9 \\ \hline
-        Label & Acc (\%) & 91.7 \\ \cline{2-3}
-         & AllAcc (\%) & 28.9 \\ \cline{2-3}
-         & F1-Score (\%) & 50.8 \\ \cline{2-3}
-         & Precision (\%) & 71.8 \\ \cline{2-3}
-         & Recall (\%) & 39.4 \\ \hline
+        Total & Acc (\%) & 92.4 \\ \cline{2-3}
+         & AllAcc (\%) & 32.3 \\ \cline{2-3}
+         & F1-Score (\%) & 73.9 \\ \cline{2-3}
+         & Precision (\%) & 87.8 \\ \cline{2-3}
+         & Recall (\%) & 63.8 \\ \hline
+        Lesion & Acc (\%) & 97.3 \\ \cline{2-3}
+         & F1-Score (\%) & 98.6 \\ \cline{2-3}
+         & Precision (\%) & 97.8 \\ \cline{2-3}
+         & Recall (\%) & 99.4 \\ \hline
+        Label & Acc (\%) & 92.0 \\ \cline{2-3}
+         & AllAcc (\%) & 33.7 \\ \cline{2-3}
+         & F1-Score (\%) & 54.3 \\ \cline{2-3}
+         & Precision (\%) & 76.6 \\ \cline{2-3}
+         & Recall (\%) & 42.1 \\ \hline
     \end{tabular}
 \end{table}
 
+\begin{table}[tb]
+    \caption[]{DenseNetを用いた内視鏡画像からの\\マルチラベル予測}
+    \label{tb:densenet161_e}
+    \centering
+    \normalsize
+    \begin{tabular}{c|c|r} \hline
+        Total & Acc (\%) & 92.5 \\ \cline{2-3}
+         & AllAcc (\%) & 33.4 \\ \cline{2-3}
+         & F1-Score (\%) & 74.0 \\ \cline{2-3}
+         & Precision (\%) & 88.6 \\ \cline{2-3}
+         & Recall (\%) & 63.6 \\ \hline
+        Lesion & Acc (\%) & 98.0 \\ \cline{2-3}
+         & F1-Score (\%) & 98.9 \\ \cline{2-3}
+         & Precision (\%) & 98.4 \\ \cline{2-3}
+         & Recall (\%) & 99.5 \\ \hline
+        Label & Acc (\%) & 92.1 \\ \cline{2-3}
+         & AllAcc (\%) & 34.3 \\ \cline{2-3}
+         & F1-Score (\%) & 54.2 \\ \cline{2-3}
+         & Precision (\%) & 77.3 \\ \cline{2-3}
+         & Recall (\%) & 41.7 \\ \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[tb]
+    \caption[]{3D-ResNetを用いた内視鏡画像からのマルチラベル予測}
+    \label{tb:resnet3d_e}
+    \centering
+    \normalsize
+    \begin{tabular}{c|c|r} \hline
+        Total & Acc (\%) & 91.7 \\ \cline{2-3}
+         & AllAcc (\%) & 23.3 \\ \cline{2-3}
+         & F1-Score (\%) & 71.3 \\ \cline{2-3}
+         & Precision (\%) & 85.7 \\ \cline{2-3}
+         & Recall (\%) & 61.1 \\ \hline
+        Lesion & Acc (\%) & 98.8 \\ \cline{2-3}
+         & F1-Score (\%) & 99.4 \\ \cline{2-3}
+         & Precision (\%) & 99.0 \\ \cline{2-3}
+         & Recall (\%) & 99.8 \\ \hline
+        Label & Acc (\%) & 91.2 \\ \cline{2-3}
+         & AllAcc (\%) & 23.5 \\ \cline{2-3}
+         & F1-Score (\%) & 48.3 \\ \cline{2-3}
+         & Precision (\%) & 69.9 \\ \cline{2-3}
+         & Recall (\%) & 36.9 \\ \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[tb]
+    \caption[]{3D-ResNetを用いた内視鏡画像からのマルチラベル予測}
+    \label{tb:resnet3d_m}
+    \centering
+    \normalsize
+    \begin{tabular}{c|c|r} \hline
+        Total & Acc (\%) & 92.0 \\ \cline{2-3}
+         & AllAcc (\%) & 26.3 \\ \cline{2-3}
+         & F1-Score (\%) & 71.8 \\ \cline{2-3}
+         & Precision (\%) & 88.7 \\ \cline{2-3}
+         & Recall (\%) & 60.4 \\ \hline
+        Lesion & Acc (\%) & 99.0 \\ \cline{2-3}
+         & F1-Score (\%) & 99.5 \\ \cline{2-3}
+         & Precision (\%) & 99.0 \\ \cline{2-3}
+         & Recall (\%) & 99.9 \\ \hline
+        Label & Acc (\%) & 91.5 \\ \cline{2-3}
+         & AllAcc (\%) & 27.0 \\ \cline{2-3}
+         & F1-Score (\%) & 48.4 \\ \cline{2-3}
+         & Precision (\%) & 75.0 \\ \cline{2-3}
+         & Recall (\%) & 35.7 \\ \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[tb]
+    \caption[]{3D-ResNetを用いた内視鏡画像からのマルチラベル予測}
+    \label{tb:resnet3d_e_m}
+    \centering
+    \normalsize
+    \begin{tabular}{c|c|r} \hline
+        Total & Acc (\%) & 91.8 \\ \cline{2-3}
+         & AllAcc (\%) & 26.5 \\ \cline{2-3}
+         & F1-Score (\%) & 71.6 \\ \cline{2-3}
+         & Precision (\%) & 87.0 \\ \cline{2-3}
+         & Recall (\%) & 60.9 \\ \hline
+        Lesion & Acc (\%) & 98.2 \\ \cline{2-3}
+         & F1-Score (\%) & 99.1 \\ \cline{2-3}
+         & Precision (\%) & 98.9 \\ \cline{2-3}
+         & Recall (\%) & 99.3 \\ \hline
+        Label & Acc (\%) & 91.4 \\ \cline{2-3}
+         & AllAcc (\%) & 26.9 \\ \cline{2-3}
+         & F1-Score (\%) & 48.7 \\ \cline{2-3}
+         & Precision (\%) & 72.2 \\ \cline{2-3}
+         & Recall (\%) & 36.8 \\ \hline
+    \end{tabular}
+\end{table}
