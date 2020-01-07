@@ -179,7 +179,8 @@ def main(result_dir, mode):
     elif mode == 'threshold':
         output_path = outputs_path / ('test-' + result_dir + '_ith-none_lth-*')
         test_result_paths = glob.glob(str(output_path / 'test_result.joblib'))
-        test_result_paths = sorted(test_result_paths, key=lambda x: float(x.split('lth-')[1].split('/')[0]))[1:]
+        test_result_paths = [x for x in test_result_paths if 0.0 < float(x.split('lth-')[1].split('/')[0])]
+        test_result_paths = sorted(test_result_paths, key=lambda x: float(x.split('lth-')[1].split('/')[0]))
         test_result_dict_list = list()
         for test_result_path in tqdm(test_result_paths):
             with open(test_result_path, 'rb') as f:
