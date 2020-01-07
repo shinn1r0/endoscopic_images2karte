@@ -1,8 +1,14 @@
 In this paper, we devised an automatic creation support system for a draft of medical charts from endoscopic images using a deep learning model.
 In previous studies, learning and prediction were performed on an image basis, and prediction on a patient basis was impossible.
-It was a system that could predict only one type of lesion.
-In this study, multi-label teacher data consisting of a label indicating whether one or more lesions exist and a plurality of lesion labels was used.
-This made it possible to predict multiple lesions on a patient basis.
+In this study, we created datasets and models so that multiple images in endoscopy could be learned and predicted on a patient basis.
+The system in the previous study could predict only one type of lesion.
+In this study, label data consisting of a label indicating whether one or more lesions exist and a plurality of lesion labels was used.
+These improvements made it possible to predict multiple lesions on a patient basis.
 In addition, in the existing study, label data was manually assigned to all images, whereas in this study, multi-label data was automatically generated from a simple chart actually created by a doctor.
-Using this learning data, we trained and compared several models of 2D and 3D convolutional neural networks. And some models recorded high inference performance.
-We also implemented a function that supports doctors' judgment by generating predictions with multiple reliability levels when generating prediction labels.
+Using this learning data, we trained and compared several models of 2D and 3D convolutional neural networks. 
+And some models recorded high inference performance.
+The F1-Score was 98\% or more in determining whether a patient had a lesion, and the F1-Score was 50\% or more in predicting multiple lesion information.
+We also generate predictions with multiple reliability levels when predicting labels.
+In the prediction of multiple lesion information, the precision was 87\% or more for highly reliable predictions, and the recall was 81\% or more for lowly reliability predictions.
+As a result, the system in this study can be used to support the judgment of doctors.
+

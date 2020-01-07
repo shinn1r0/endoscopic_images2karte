@@ -1,0 +1,14 @@
+# Fdb version 3
+["dvipdf"] 0 "0_jabstract.dvi" "0_jabstract.pdf" "0_jabstract" 0
+  "0_jabstract.dvi" 0 -1 0 "latex"
+  (generated)
+  "0_jabstract.pdf"
+["latex"] 1578383513 "0_jabstract.tex" "0_jabstract.dvi" "0_jabstract" 1578383513
+  "/usr/local/texlive/2018/texmf-dist/web2c/texmf.cnf" 1544742277 35176 ce7fee66be1fb01dfc6b702a7dbfa0ea ""
+  "/usr/local/texlive/2018/texmf-var/web2c/eptex/platex.fmt" 1574252107 4485154 39515c4705c14c410fdd7f65ec13e43f ""
+  "/usr/local/texlive/2018/texmf.cnf" 1549102333 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
+  "0_jabstract.aux" 1578383513 8 a94a2480d3289e625eea47cd1b285758 ""
+  "0_jabstract.tex" 1578292030 1338 4f950e08dd5e1fb7f51c1d3f0a87a1e3 ""
+  (generated)
+  "0_jabstract.dvi"
+  "0_jabstract.log"

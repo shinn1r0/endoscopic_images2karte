@@ -1,0 +1,14 @@
+# Fdb version 3
+["dvipdf"] 0 "3_proposed_model.dvi" "3_proposed_model.pdf" "3_proposed_model" 0
+  "3_proposed_model.dvi" 0 -1 0 "latex"
+  (generated)
+  "3_proposed_model.pdf"
+["latex"] 1578383514 "3_proposed_model.tex" "3_proposed_model.dvi" "3_proposed_model" 1578383514
+  "/usr/local/texlive/2018/texmf-dist/web2c/texmf.cnf" 1544742277 35176 ce7fee66be1fb01dfc6b702a7dbfa0ea ""
+  "/usr/local/texlive/2018/texmf-var/web2c/eptex/platex.fmt" 1574252107 4485154 39515c4705c14c410fdd7f65ec13e43f ""
+  "/usr/local/texlive/2018/texmf.cnf" 1549102333 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
+  "3_proposed_model.aux" 1578383514 8 a94a2480d3289e625eea47cd1b285758 ""
+  "3_proposed_model.tex" 1578383481 9160 d3fc35f3d4a1bba1c09b0c0b7a0e256b ""
+  (generated)
+  "3_proposed_model.dvi"
+  "3_proposed_model.log"
