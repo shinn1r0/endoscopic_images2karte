@@ -1,37 +1,36 @@
-\section{評価実験}
-\subsection{実験条件の設定}
-\subsubsection{モデルの損失関数}
+\section{実験条件の設定}
+\subsection{モデルの損失関数}
 マルチラベル予測の学習のためバイナリ交差エントロピーを用いた。
-\subsubsection{モデルの最適化手法}
+\subsection{モデルの最適化手法}
 確率的勾配降下法\cite{SGD}を拡張したAdaptive Moment Estimation (Adam)\cite{Adam}を使用した。
 これは勾配の大きさと更新量によって学習率を変化させていく方法で、様々なタスクで高性能を記録している。
-\subsubsection{モデルの学習回数とバッチサイズ}
+\subsection{モデルの学習回数とバッチサイズ}
 モデルの学習回数はすべて25にした。
 これは訓練時における損失関数の推移から判断した。
 またバッチサイズはDenseNet121で50、DenseNet161で24、3D-ResNetで3とした。
 これは使用した計算機のメモリの容量によって決めた。
-\subsection{評価指標}
+\section{評価指標}
 評価指標は正解率、完全一致正解率、再現率、適合率、F1-Scoreの５つとした。
 以下本文中の各データとは、画像を個別に入力する手法では各画像、画像を患者ごとにまとめて入力する手法では画像を時間軸で連結した３次元データを示す。
-\subsubsection{正解率 (Acc)}
+\subsection{正解率 (Acc)}
 $各データにおける正解率 = \frac{正解したラベルの数}{マルチラベルにおける全てのラベルの数}$
 を計算し、これをすべてのデータにおいて平均を計算した。
-\subsubsection{完全一致正解率 (AllAcc)}
+\subsection{完全一致正解率 (AllAcc)}
 $AllAcc=\frac{マルチラベルにおける全てのラベルで一致したデータの数}{全てのデータの数}$
-\subsubsection{適合率 (Precision)}
+\subsection{適合率 (Precision)}
 $Precision = \frac{真陽性}{真陽性+偽陽性}$
 
 全てのデータにおける適合率を計算するために、各データにおける混合行列を集計し、その後適合率を計算した。
-\subsubsection{再現率 (Recall)}
+\subsection{再現率 (Recall)}
 $Recall = \frac{真陽性}{真陽性+偽陰性}$
 
 全てのデータにおける再現率を計算するために、各データにおける混合行列を集計し、その後再現率を計算した。
-\subsubsection{F1-Score}
+\subsection{F1-Score}
 適合率と再現率がトレードオフの関係であるため、２つの指標を総合的に判断するためにF1-Scoreを用いた。
 
 $F1{\rm \mathchar"712D}Score = \frac{Precision * Recall}{(Precision + Recall) / 2}$
 
-\subsubsection{評価指標とモデルの性能の関係性}
+\subsection{評価指標とモデルの性能の関係性}
 \begin{itemize}
     \item 正解率\\
         正解率は指標としてモデルの性能をあまり評価できない。
@@ -52,168 +51,38 @@ $F1{\rm \mathchar"712D}Score = \frac{Precision * Recall}{(Precision + Recall) / 
         本実験ではこの数値が高いものを良いモデルとして評価する。
 \end{itemize}
 
-\subsection{DenseNetを用いた内視鏡画像からの\\マルチラベル予測}
+\section{DenseNetを用いた内視鏡画像からの\\マルチラベル予測}
+\subsection{最も性能の良いモデルの選定}
+\label{sec:ex1}
 \subsubsection{実験概要}
+\begin{enumerate}
+    \item DenseNet121-分類器拡張なし (モデル１)
+    \item DenseNet121-分類器拡張あり (モデル２)
+    \item DenseNet161-分類器拡張なし (モデル３)
+    \item DenseNet161-分類器拡張あり (モデル４)
+\end{enumerate}
+以上の４モデルで実験を行い、性能を比較した。
+実験の流れは以下のように行った。
 各画像をマルチラベルと関連付けしたデータセットを用いた。
 画像をモデルに入力し出力されたマルチラベルと教師データのマルチラベルから損失を計算し最適化を行った。
-モデルが出力したマルチラベルの各ラベルを二値化する際のしきい値を変化させた。
-その結果からテスト出力の際のしきい値を決定し、推論を行った。
+実験の出力結果は、学習過程での損失とF1-Scoreの推移と、検証データを用いた際の各評価指標の値となる。
 
 \subsubsection{実験結果}
-結果を表\ref{tb:densenet121_e}と図\ref{fig:densenet121_e_result}に示す。
-表\ref{tb:densenet121_e}は検証データを用いた際の予測の結果を示す。
+モデル１の結果を図\ref{fig:densenet121_result_process}と表\ref{tb:densenet121}に示す。
+図\ref{fig:densenet121_result_process}は学習過程での損失とF1-Scoreの推移を示している。
+表\ref{tb:densenet121}は検証データを用いた際の予測の結果を示す。
 この表のTotalは図\ref{fig:multilabel}における全てのラベルにおける結果を、LesionとLabelは図\ref{fig:multilabel}のラベルの1番目と2番目以降に分けて計算した結果を示している。
-図\ref{fig:densenet121_e_result_process}は学習過程での損失とF1-Scoreの推移を示している。
-図\ref{fig:densenet121_e_result_threshold}はテスト推論において、モデルが出力したマルチラベルの値を二値化する際のしきい値を変化させた際の、PrecisionとRecallとF1-Scoreの変化を示している。
 
-\begin{table}[tb]
-    \caption[]{DenseNetを用いた内視鏡画像からの\\マルチラベル予測}
-    \label{tb:densenet121_e}
-    \centering
-    \normalsize
-    \begin{tabular}{c|c|r} \hline
-        Total & Acc (\%) & 92.4 \\ \cline{2-3}
-         & AllAcc (\%) & 32.8 \\ \cline{2-3}
-         & F1-Score (\%) & 73.9 \\ \cline{2-3}
-         & Precision (\%) & 88.8 \\ \cline{2-3}
-         & Recall (\%) & 63.2 \\ \hline
-        Lesion & Acc (\%) & 97.4 \\ \cline{2-3}
-         & F1-Score (\%) & 98.7 \\ \cline{2-3}
-         & Precision (\%) & 98.0 \\ \cline{2-3}
-         & Recall (\%) & 99.4 \\ \hline
-        Label & Acc (\%) & 92.1 \\ \cline{2-3}
-         & AllAcc (\%) & 34.1 \\ \cline{2-3}
-         & F1-Score (\%) & 53.9 \\ \cline{2-3}
-         & Precision (\%) & 78.1 \\ \cline{2-3}
-         & Recall (\%) & 41.2 \\ \hline
-    \end{tabular}
-\end{table}
-\begin{figure}[tb]
-    \centering
-        \subfloat[][学習過程]{\includegraphics[width=130mm]{./fig/densenet121_e_p02process.png}\label{fig:densenet121_e_result_process}} \quad
-        %\subfloat[][検証結果]{\includegraphics[width=80mm]{./fig/result0.png}\label{fig:0}} \quad
-        \subfloat[][各しきい値におけるテスト]{\includegraphics[width=130mm]{./fig/densenet121_e_p02threshold.png}\label{fig:densenet121_e_result_threshold}} \quad
-        %\subfloat[][推論結果]{\includegraphics[width=70mm]{./fig/sample4.jpg}\label{fig:04}} \quad
-    \captionsetup{format=plain,font=normalsize,margin=30pt,name=図}
-    \caption[]{DenseNetを用いた内視鏡画像からのマルチラベル予測}
-    \label{fig:densenet121_e_result}
-\end{figure}
-
-\subsection{3D-ResNetを用いた内視鏡画像からのマルチラベル予測}
-\subsubsection{実験概要}
-各患者ごとに画像を時間軸で連結した三次元データとマルチラベルと関連付けしたデータセットを用いた。
-三次元データをモデルに入力し出力されたマルチラベルと教師データのマルチラベルから損失を計算し最適化を行った。
-モデルが出力したマルチラベルの各ラベルを二値化する際のしきい値を変化させた。
-その結果からテスト出力の際のしきい値を決定し、推論を行った。
-
-\subsubsection{実験結果}
-結果を表\ref{tb:resnet3d}と図\ref{fig:resnet3d_result}に示す。
-表\ref{tb:resnet3d}は検証データを用いた際の予測の結果を示す。
-この表のTotalは図\ref{fig:multilabel}における全てのラベルにおける結果を、LesionとLabelは図\ref{fig:multilabel}のラベルの1番目と2番目以降に分けて計算した結果を示している。
-図\ref{fig:resnet3d_result_process}は学習過程での損失とF1-Scoreの推移を示している。
-図\ref{fig:resnet3d_result_threshold}はテスト推論において、モデルが出力したマルチラベルの値を二値化する際のしきい値を変化させた際の、PrecisionとRecallとF1-Scoreの変化を示している。
-
-\begin{table}[tb]
-    \caption[]{3D-ResNetを用いた内視鏡画像からのマルチラベル予測}
-    \label{tb:resnet3d}
-    \centering
-    \normalsize
-    \begin{tabular}{c|c|r} \hline
-        Total & Acc (\%) & 92.2 \\ \cline{2-3}
-         & AllAcc (\%) & 28.5 \\ \cline{2-3}
-         & F1-Score (\%) & 72.9 \\ \cline{2-3}
-         & Precision (\%) & 86.5 \\ \cline{2-3}
-         & Recall (\%) & 63.0 \\ \hline
-        Lesion & Acc (\%) & 98.8 \\ \cline{2-3}
-         & F1-Score (\%) & 99.4 \\ \cline{2-3}
-         & Precision (\%) & 98.9 \\ \cline{2-3}
-         & Recall (\%) & 99.9 \\ \hline
-        Label & Acc (\%) & 91.7 \\ \cline{2-3}
-         & AllAcc (\%) & 28.9 \\ \cline{2-3}
-         & F1-Score (\%) & 50.8 \\ \cline{2-3}
-         & Precision (\%) & 71.8 \\ \cline{2-3}
-         & Recall (\%) & 39.4 \\ \hline
-    \end{tabular}
-\end{table}
-\begin{figure}[tb]
-    \centering
-        \subfloat[][学習過程]{\includegraphics[width=130mm]{./fig/resnet3dprocess.png}\label{fig:resnet3d_result_process}} \quad
-        %\subfloat[][検証結果]{\includegraphics[width=70mm]{./fig/sample2.jpg}\label{fig:02}} \quad
-        \subfloat[][各しきい値におけるテスト]{\includegraphics[width=130mm]{./fig/resnet3dthreshold.png}\label{fig:resnet3d_result_threshold}} \quad
-        %\subfloat[][推論結果]{\includegraphics[width=70mm]{./fig/sample4.jpg}\label{fig:04}} \quad
-    \captionsetup{format=plain,font=normalsize,margin=30pt,name=図}
-    \caption[]{3D-ResNetを用いた内視鏡画像からのマルチラベル予測}
-    \label{fig:resnet3d_result}
-\end{figure}
-
-\begin{figure}[tb]
-    \centering
-        \subfloat[][学習過程]{\includegraphics[width=130mm]{./fig/densenet121process.png}\label{fig:densenet121_result_process}} \quad
-        %\subfloat[][検証結果]{\includegraphics[width=70mm]{./fig/sample2.jpg}\label{fig:02}} \quad
-        \subfloat[][各しきい値におけるテスト]{\includegraphics[width=130mm]{./fig/densenet121threshold.png}\label{fig:densenet121_result_threshold}} \quad
-        %\subfloat[][推論結果]{\includegraphics[width=70mm]{./fig/sample4.jpg}\label{fig:04}} \quad
-    \captionsetup{format=plain,font=normalsize,margin=30pt,name=図}
-    \caption[]{DenseNetを用いた内視鏡画像からのマルチラベル予測}
-    \label{fig:densenet121_result}
-\end{figure}
-
-\begin{figure}[tb]
-    \centering
-        \subfloat[][学習過程]{\includegraphics[width=130mm]{./fig/densenet161process.png}\label{fig:densenet161_result_process}} \quad
-        %\subfloat[][検証結果]{\includegraphics[width=70mm]{./fig/sample2.jpg}\label{fig:02}} \quad
-        \subfloat[][各しきい値におけるテスト]{\includegraphics[width=130mm]{./fig/densenet161threshold.png}\label{fig:densenet161_result_threshold}} \quad
-        %\subfloat[][推論結果]{\includegraphics[width=70mm]{./fig/sample4.jpg}\label{fig:04}} \quad
-    \captionsetup{format=plain,font=normalsize,margin=30pt,name=図}
-    \caption[]{DenseNetを用いた内視鏡画像からのマルチラベル予測}
-    \label{fig:densenet161_result}
-\end{figure}
-
-\begin{figure}[tb]
-    \centering
-        \subfloat[][学習過程]{\includegraphics[width=130mm]{./fig/densenet161_eprocess.png}\label{fig:densenet161_e_result_process}} \quad
-        %\subfloat[][検証結果]{\includegraphics[width=70mm]{./fig/sample2.jpg}\label{fig:02}} \quad
-        \subfloat[][各しきい値におけるテスト]{\includegraphics[width=130mm]{./fig/densenet161_ethreshold.png}\label{fig:densenet161_e_result_threshold}} \quad
-        %\subfloat[][推論結果]{\includegraphics[width=70mm]{./fig/sample4.jpg}\label{fig:04}} \quad
-    \captionsetup{format=plain,font=normalsize,margin=30pt,name=図}
-    \caption[]{DenseNetを用いた内視鏡画像からのマルチラベル予測}
-    \label{fig:densenet161_e_result}
-\end{figure}
-
-\begin{figure}[tb]
-    \centering
-        \subfloat[][学習過程]{\includegraphics[width=130mm]{./fig/resnet3d_eprocess.png}\label{fig:resnet3d_e_result_process}} \quad
-        %\subfloat[][検証結果]{\includegraphics[width=70mm]{./fig/sample2.jpg}\label{fig:02}} \quad
-        \subfloat[][各しきい値におけるテスト]{\includegraphics[width=130mm]{./fig/resnet3d_ethreshold.png}\label{fig:resnet3d_e_result_threshold}} \quad
-        %\subfloat[][推論結果]{\includegraphics[width=70mm]{./fig/sample4.jpg}\label{fig:04}} \quad
-    \captionsetup{format=plain,font=normalsize,margin=30pt,name=図}
-    \caption[]{3D-ResNetを用いた内視鏡画像からのマルチラベル予測}
-    \label{fig:resnet3d_e_result}
-\end{figure}
-
-\begin{figure}[tb]
-    \centering
-        \subfloat[][学習過程]{\includegraphics[width=130mm]{./fig/resnet3d_mprocess.png}\label{fig:resnet3d_m_result_process}} \quad
-        %\subfloat[][検証結果]{\includegraphics[width=70mm]{./fig/sample2.jpg}\label{fig:02}} \quad
-        \subfloat[][各しきい値におけるテスト]{\includegraphics[width=130mm]{./fig/resnet3d_mthreshold.png}\label{fig:resnet3d_m_result_threshold}} \quad
-        %\subfloat[][推論結果]{\includegraphics[width=70mm]{./fig/sample4.jpg}\label{fig:04}} \quad
-    \captionsetup{format=plain,font=normalsize,margin=30pt,name=図}
-    \caption[]{3D-ResNetを用いた内視鏡画像からのマルチラベル予測}
-    \label{fig:resnet3d_m_result}
-\end{figure}
-
-\begin{figure}[tb]
-    \centering
-        \subfloat[][学習過程]{\includegraphics[width=130mm]{./fig/resnet3d_e_mprocess.png}\label{fig:resnet3d_e_m_result_process}} \quad
-        %\subfloat[][検証結果]{\includegraphics[width=70mm]{./fig/sample2.jpg}\label{fig:02}} \quad
-        \subfloat[][各しきい値におけるテスト]{\includegraphics[width=130mm]{./fig/resnet3d_e_mthreshold.png}\label{fig:resnet3d_e_m_result_threshold}} \quad
-        %\subfloat[][推論結果]{\includegraphics[width=70mm]{./fig/sample4.jpg}\label{fig:04}} \quad
-    \captionsetup{format=plain,font=normalsize,margin=30pt,name=図}
-    \caption[]{3D-ResNetを用いた内視鏡画像からのマルチラベル予測}
-    \label{fig:resnet3d_e_m_result}
+\begin{figure}[htbp]
+    \begin{center}
+        \includegraphics[width=150mm]{./fig/densenet121process.png}
+        \caption{モデル１の学習過程}
+        \label{fig:densenet121_result_process}
+    \end{center}
 \end{figure}
 
 \begin{table}[tb]
-    \caption[]{DenseNetを用いた内視鏡画像からの\\マルチラベル予測}
+    \caption[]{モデル１の検証結果}
     \label{tb:densenet121}
     \centering
     \normalsize
@@ -235,8 +104,59 @@ $F1{\rm \mathchar"712D}Score = \frac{Precision * Recall}{(Precision + Recall) / 
     \end{tabular}
 \end{table}
 
+\newpage
+モデル２の結果を図\ref{fig:densenet121_e_result_process}と表\ref{tb:densenet121_e}に示す。
+図\ref{fig:densenet121_e_result_process}は学習過程での損失とF1-Scoreの推移を示している。
+表\ref{tb:densenet121_e}は検証データを用いた際の予測の結果を示す。
+この表のTotalは図\ref{fig:multilabel}における全てのラベルにおける結果を、LesionとLabelは図\ref{fig:multilabel}のラベルの1番目と2番目以降に分けて計算した結果を示している。
+
+\begin{figure}[htbp]
+    \begin{center}
+        \includegraphics[width=150mm]{./fig/densenet121_e_p02process.png}
+        \caption{モデル２の学習過程}
+        \label{fig:densenet121_e_result_process}
+    \end{center}
+\end{figure}
+
 \begin{table}[tb]
-    \caption[]{DenseNetを用いた内視鏡画像からの\\マルチラベル予測}
+    \caption[]{モデル２の検証結果}
+    \label{tb:densenet121_e}
+    \centering
+    \normalsize
+    \begin{tabular}{c|c|r} \hline
+        Total & Acc (\%) & 92.4 \\ \cline{2-3}
+         & AllAcc (\%) & 32.8 \\ \cline{2-3}
+         & F1-Score (\%) & 73.9 \\ \cline{2-3}
+         & Precision (\%) & 88.8 \\ \cline{2-3}
+         & Recall (\%) & 63.2 \\ \hline
+        Lesion & Acc (\%) & 97.4 \\ \cline{2-3}
+         & F1-Score (\%) & 98.7 \\ \cline{2-3}
+         & Precision (\%) & 98.0 \\ \cline{2-3}
+         & Recall (\%) & 99.4 \\ \hline
+        Label & Acc (\%) & 92.1 \\ \cline{2-3}
+         & AllAcc (\%) & 34.1 \\ \cline{2-3}
+         & F1-Score (\%) & 53.9 \\ \cline{2-3}
+         & Precision (\%) & 78.1 \\ \cline{2-3}
+         & Recall (\%) & 41.2 \\ \hline
+    \end{tabular}
+\end{table}
+
+\newpage
+モデル３の結果を図\ref{fig:densenet161_result_process}と表\ref{tb:densenet161}に示す。
+図\ref{fig:densenet161_result_process}は学習過程での損失とF1-Scoreの推移を示している。
+表\ref{tb:densenet161}は検証データを用いた際の予測の結果を示す。
+この表のTotalは図\ref{fig:multilabel}における全てのラベルにおける結果を、LesionとLabelは図\ref{fig:multilabel}のラベルの1番目と2番目以降に分けて計算した結果を示している。
+
+\begin{figure}[htbp]
+    \begin{center}
+        \includegraphics[width=150mm]{./fig/densenet161process.png}
+        \caption{モデル３の学習過程}
+        \label{fig:densenet161_result_process}
+    \end{center}
+\end{figure}
+
+\begin{table}[tb]
+    \caption[]{モデル３の検証結果}
     \label{tb:densenet161}
     \centering
     \normalsize
@@ -258,8 +178,22 @@ $F1{\rm \mathchar"712D}Score = \frac{Precision * Recall}{(Precision + Recall) / 
     \end{tabular}
 \end{table}
 
+\newpage
+モデル４の結果を図\ref{fig:densenet161_e_result_process}と表\ref{tb:densenet161_e}に示す。
+図\ref{fig:densenet161_e_result_process}は学習過程での損失とF1-Scoreの推移を示している。
+表\ref{tb:densenet161_e}は検証データを用いた際の予測の結果を示す。
+この表のTotalは図\ref{fig:multilabel}における全てのラベルにおける結果を、LesionとLabelは図\ref{fig:multilabel}のラベルの1番目と2番目以降に分けて計算した結果を示している。
+
+\begin{figure}[htbp]
+    \begin{center}
+        \includegraphics[width=150mm]{./fig/densenet161_eprocess.png}
+        \caption{モデル４の学習過程}
+        \label{fig:densenet161_e_result_process}
+    \end{center}
+\end{figure}
+
 \begin{table}[tb]
-    \caption[]{DenseNetを用いた内視鏡画像からの\\マルチラベル予測}
+    \caption[]{モデル４の検証結果}
     \label{tb:densenet161_e}
     \centering
     \normalsize
@@ -281,8 +215,94 @@ $F1{\rm \mathchar"712D}Score = \frac{Precision * Recall}{(Precision + Recall) / 
     \end{tabular}
 \end{table}
 
+\newpage
+\subsection{しきい値を変化させた際の適合率と再現率の変化の確認}
+\label{sec:ex11}
+\subsubsection{実験概要}
+\ref{sec:ex1}の実験で、マルチラベル全体でのF1-Scoreが最も高かったモデル１を本実験で用いる。
+本実験では、モデルが出力したマルチラベルの各ラベルを二値化する際のしきい値を変化させた。
+しきい値は0.1から0.9まで0.1刻みで変化させ、その値における適合率、再現率、F1-Scoreを出力した。
+
+図\ref{fig:densenet121_result_threshold}はテスト推論において、モデルが出力したマルチラベルの値を二値化する際のしきい値を変化させた際の、適合率、再現率、F1-Scoreの変化を示している。
+
+\begin{figure}[htbp]
+    \begin{center}
+        \includegraphics[width=150mm]{./fig/densenet121threshold.png}
+        \caption{しきい値を変化させた際の適合率と再現率の変化}
+        \label{fig:densenet121_result_threshold}
+    \end{center}
+\end{figure}
+
+\newpage
+\section{3D-ResNetを用いた内視鏡画像からのマルチラベル予測}
+\subsection{最も性能の良いモデルの選定}
+\label{sec:ex2}
+\subsubsection{実験概要}
+\begin{enumerate}
+    \item 3D-ResNet-AveragePool-分類器拡張なし (モデル１)
+    \item 3D-ResNet-AveragePool-分類器拡張あり (モデル２)
+    \item 3D-ResNet-MaxPool-分類器拡張なし (モデル３)
+    \item 3D-ResNet-MaxPool-分類器拡張あり (モデル４)
+\end{enumerate}
+以上の４モデルで実験を行い、性能を比較した。
+実験の流れは以下のように行った。
+各患者ごとに画像を時間軸で連結した三次元データとマルチラベルと関連付けしたデータセットを用いた。
+三次元データをモデルに入力し出力されたマルチラベルと教師データのマルチラベルから損失を計算し最適化を行った。
+実験の出力結果は、学習過程での損失とF1-Scoreの推移と、検証データを用いた際の各評価指標の値となる。
+
+\subsubsection{実験結果}
+モデル１の結果を図\ref{fig:resnet3d_result_process}と表\ref{tb:resnet3d}に示す。
+図\ref{fig:resnet3d_result_process}は学習過程での損失とF1-Scoreの推移を示している。
+表\ref{tb:resnet3d}は検証データを用いた際の予測の結果を示す。
+この表のTotalは図\ref{fig:multilabel}における全てのラベルにおける結果を、LesionとLabelは図\ref{fig:multilabel}のラベルの1番目と2番目以降に分けて計算した結果を示している。
+
+\begin{figure}[htbp]
+    \begin{center}
+        \includegraphics[width=150mm]{./fig/resnet3dprocess.png}
+        \caption{モデル１の学習過程}
+        \label{fig:resnet3d_result_process}
+    \end{center}
+\end{figure}
+
 \begin{table}[tb]
-    \caption[]{3D-ResNetを用いた内視鏡画像からのマルチラベル予測}
+    \caption[]{モデル１の検証結果}
+    \label{tb:resnet3d}
+    \centering
+    \normalsize
+    \begin{tabular}{c|c|r} \hline
+        Total & Acc (\%) & 92.2 \\ \cline{2-3}
+         & AllAcc (\%) & 28.5 \\ \cline{2-3}
+         & F1-Score (\%) & 72.9 \\ \cline{2-3}
+         & Precision (\%) & 86.5 \\ \cline{2-3}
+         & Recall (\%) & 63.0 \\ \hline
+        Lesion & Acc (\%) & 98.8 \\ \cline{2-3}
+         & F1-Score (\%) & 99.4 \\ \cline{2-3}
+         & Precision (\%) & 98.9 \\ \cline{2-3}
+         & Recall (\%) & 99.9 \\ \hline
+        Label & Acc (\%) & 91.7 \\ \cline{2-3}
+         & AllAcc (\%) & 28.9 \\ \cline{2-3}
+         & F1-Score (\%) & 50.8 \\ \cline{2-3}
+         & Precision (\%) & 71.8 \\ \cline{2-3}
+         & Recall (\%) & 39.4 \\ \hline
+    \end{tabular}
+\end{table}
+
+\newpage
+モデル２の結果を図\ref{fig:resnet3d_e_result_process}と表\ref{tb:resnet3d_e}に示す。
+図\ref{fig:resnet3d_e_result_process}は学習過程での損失とF1-Scoreの推移を示している。
+表\ref{tb:resnet3d_e}は検証データを用いた際の予測の結果を示す。
+この表のTotalは図\ref{fig:multilabel}における全てのラベルにおける結果を、LesionとLabelは図\ref{fig:multilabel}のラベルの1番目と2番目以降に分けて計算した結果を示している。
+
+\begin{figure}[htbp]
+    \begin{center}
+        \includegraphics[width=150mm]{./fig/resnet3d_eprocess.png}
+        \caption{モデル２の学習過程}
+        \label{fig:resnet3d_e_result_process}
+    \end{center}
+\end{figure}
+
+\begin{table}[tb]
+    \caption[]{モデル２の検証結果}
     \label{tb:resnet3d_e}
     \centering
     \normalsize
@@ -304,8 +324,22 @@ $F1{\rm \mathchar"712D}Score = \frac{Precision * Recall}{(Precision + Recall) / 
     \end{tabular}
 \end{table}
 
+\newpage
+モデル３の結果を図\ref{fig:resnet3d_m_result_process}と表\ref{tb:resnet3d_m}に示す。
+図\ref{fig:resnet3d_m_result_process}は学習過程での損失とF1-Scoreの推移を示している。
+表\ref{tb:resnet3d_m}は検証データを用いた際の予測の結果を示す。
+この表のTotalは図\ref{fig:multilabel}における全てのラベルにおける結果を、LesionとLabelは図\ref{fig:multilabel}のラベルの1番目と2番目以降に分けて計算した結果を示している。
+
+\begin{figure}[htbp]
+    \begin{center}
+        \includegraphics[width=150mm]{./fig/resnet3d_mprocess.png}
+        \caption{モデル３の学習過程}
+        \label{fig:resnet3d_m_result_process}
+    \end{center}
+\end{figure}
+
 \begin{table}[tb]
-    \caption[]{3D-ResNetを用いた内視鏡画像からのマルチラベル予測}
+    \caption[]{モデル３の検証結果}
     \label{tb:resnet3d_m}
     \centering
     \normalsize
@@ -327,8 +361,22 @@ $F1{\rm \mathchar"712D}Score = \frac{Precision * Recall}{(Precision + Recall) / 
     \end{tabular}
 \end{table}
 
+\newpage
+モデル４の結果を図\ref{fig:resnet3d_e_m_result_process}と表\ref{tb:resnet3d_e_m}に示す。
+図\ref{fig:resnet3d_e_m_result_process}は学習過程での損失とF1-Scoreの推移を示している。
+表\ref{tb:resnet3d_e_m}は検証データを用いた際の予測の結果を示す。
+この表のTotalは図\ref{fig:multilabel}における全てのラベルにおける結果を、LesionとLabelは図\ref{fig:multilabel}のラベルの1番目と2番目以降に分けて計算した結果を示している。
+
+\begin{figure}[htbp]
+    \begin{center}
+        \includegraphics[width=150mm]{./fig/resnet3d_e_mprocess.png}
+        \caption{モデル４の学習過程}
+        \label{fig:resnet3d_e_m_result_process}
+    \end{center}
+\end{figure}
+
 \begin{table}[tb]
-    \caption[]{3D-ResNetを用いた内視鏡画像からのマルチラベル予測}
+    \caption[]{モデル４の検証結果}
     \label{tb:resnet3d_e_m}
     \centering
     \normalsize
@@ -349,3 +397,21 @@ $F1{\rm \mathchar"712D}Score = \frac{Precision * Recall}{(Precision + Recall) / 
          & Recall (\%) & 36.8 \\ \hline
     \end{tabular}
 \end{table}
+
+\newpage
+\subsection{しきい値を変化させた際の適合率と再現率の変化の確認}
+\label{sec:ex22}
+\subsubsection{実験概要}
+\ref{sec:ex2}の実験で、マルチラベル全体でのF1-Scoreが最も高かったモデル１を本実験で用いる。
+本実験では、モデルが出力したマルチラベルの各ラベルを二値化する際のしきい値を変化させた。
+しきい値は0.1から0.9まで0.1刻みで変化させ、その値における適合率、再現率、F1-Scoreを出力した。
+
+図\ref{fig:resnet3d_result_threshold}はテスト推論において、モデルが出力したマルチラベルの値を二値化する際のしきい値を変化させた際の、適合率、再現率、F1-Scoreの変化を示している。
+
+\begin{figure}[htbp]
+    \begin{center}
+        \includegraphics[width=150mm]{./fig/resnet3dthreshold.png}
+        \caption{しきい値を変化させた際の適合率と再現率の変化}
+        \label{fig:resnet3d_result_threshold}
+    \end{center}
+\end{figure}
