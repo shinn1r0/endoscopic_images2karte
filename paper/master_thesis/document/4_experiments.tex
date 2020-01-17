@@ -13,22 +13,32 @@
 評価指標は正解率、完全一致正解率、再現率、適合率、F1-Scoreの５つとした。
 以下本文中の各データとは、画像を個別に入力する手法では各画像、画像を患者ごとにまとめて入力する手法では画像を時間軸で連結した３次元データを示す。
 \subsection{正解率 (Acc)}
-$各データにおける正解率 = \frac{正解したラベルの数}{マルチラベルにおける全てのラベルの数}$
+\begin{equation}
+各データにおける正解率 = \frac{正解したラベルの数}{マルチラベルにおける全てのラベルの数}
+\end{equation}
 を計算し、これをすべてのデータにおいて平均を計算した。
 \subsection{完全一致正解率 (AllAcc)}
-$AllAcc=\frac{マルチラベルにおける全てのラベルで一致したデータの数}{全てのデータの数}$
+\begin{equation}
+AllAcc=\frac{マルチラベルにおける全てのラベルで一致したデータの数}{全てのデータの数}
+\end{equation}
 \subsection{適合率 (Precision)}
-$Precision = \frac{真陽性}{真陽性+偽陽性}$
+\begin{equation}
+Precision = \frac{真陽性}{真陽性+偽陽性}
+\end{equation}
 
 全てのデータにおける適合率を計算するために、各データにおける混合行列を集計し、その後適合率を計算した。
 \subsection{再現率 (Recall)}
-$Recall = \frac{真陽性}{真陽性+偽陰性}$
+\begin{equation}
+Recall = \frac{真陽性}{真陽性+偽陰性}
+\end{equation}
 
 全てのデータにおける再現率を計算するために、各データにおける混合行列を集計し、その後再現率を計算した。
 \subsection{F1-Score}
 適合率と再現率がトレードオフの関係であるため、２つの指標を総合的に判断するためにF1-Scoreを用いた。
 
-$F1{\rm \mathchar"712D}Score = \frac{Precision * Recall}{(Precision + Recall) / 2}$
+\begin{equation}
+F1{\rm \mathchar"712D}Score = \frac{Precision * Recall}{(Precision + Recall) / 2}
+\end{equation}
 
 \subsection{評価指標とモデルの性能の関係性}
 \begin{itemize}

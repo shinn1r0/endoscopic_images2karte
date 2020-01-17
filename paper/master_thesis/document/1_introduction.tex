@@ -1,12 +1,3 @@
-\begin{figure}[htbp]
-    \centering
-        \subfloat[][従来手法 (Lesion A のみの予測)]{\includegraphics[width=145mm]{./fig/ieice0_0.png}\label{fig:overview0}} \quad
-        \subfloat[][提案手法 (Lesion A, B,他多数,の予測)]{\includegraphics[width=145mm]{./fig/ieice0_1.png}\label{fig:overview1}} \quad
-    \captionsetup{format=plain,font=normalsize,margin=30pt,name=図}
-    \caption[]{全体概要}
-    \label{fig:overview}
-\end{figure}
-
 現在機械学習の分野において深層学習による画像処理\cite{CNN,AlexNet,VGG,ResNet}、系列データ処理\cite{RNN,GRU,LSTM,Transformer}が高い精度を記録している。
 このため文字や画像や音声などの認識\cite{DL_LVCSR,ImageNet}や生成\cite{GAN,VAE}、翻訳\cite{Transformer,Seq2Seq,effective_attention}や検索\cite{anxious_learning}といった自然言語処理に幅広く用いられるようになっている。
 また化合物の性質予測\cite{Chemistry1,Chemistry2}やゲノム構造の解析\cite{Genomics}、株価の予測\cite{stock_prediction}のように、生物学や化学や経済学などの情報工学分野を超えた様々な分野においても用いられてきている。
@@ -37,6 +28,15 @@
 本研究では簡易カルテという精密検査や診断の確定がなされる前の作業における支援システムとして導入するため、最終的な判断の責任は医師にある。
 また学習データの作成では、簡易カルテから学習データのマルチラベルを作成するに当たって、質的診断の項目を自動で収集してマルチラベル化するため、プライバシー情報が完全に学習データに含まれない。
 学習においても、内視鏡画像とマルチラベルデータのみを深層学習モデルに通した。
+
+\begin{figure}[htbp]
+    \centering
+        \subfloat[][従来手法 (Lesion A のみの予測)]{\includegraphics[width=100mm]{./fig/ieice0_0.png}\label{fig:overview0}} \quad
+        \subfloat[][提案手法 (Lesion A, B,他多数,の予測)]{\includegraphics[width=100mm]{./fig/ieice0_1.png}\label{fig:overview1}} \quad
+    \captionsetup{format=plain,font=normalsize,margin=30pt,name=図}
+    \caption[]{全体概要}
+    \label{fig:overview}
+\end{figure}
 
 既存研究では各患者に対して数十枚ある内視鏡画像すべてに手動で病名情報をラベリングしている。
 したがって深層学習を用いるためには数十万の学習データを用意する必要があるために膨大な時間がかかっている。
