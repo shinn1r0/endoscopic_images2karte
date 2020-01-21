@@ -1,13 +1,15 @@
 In this thesis, we devised an automatic creation support system for a draft of medical charts from endoscopic images using a deep learning model.
-In the previous studies, learning and prediction were performed on an image basis, and prediction on a patient basis was impossible.
-In this study, we created datasets and models so that multiple images in endoscopy could be learned and predicted on a patient basis.
+Inspection images of patients include many images without lesions even when a patient has lesions.
+In the previous studies, learning and prediction were performed on an image basis, and prediction on a patient basis was difficult.
+In this study, we created a system that can learn and predict multiple images in endoscopy on a patient basis.
+This system is composed of datasets in which the information of a simple medical chart is summarized for each patient, and models that can learn images and datasets on a patient basis.
 The system in the previous study could predict only one type of lesion.
-In this study, label data consisting of a label indicating whether one or more lesions exist and a plurality of lesion labels was used.
-These improvements made it possible to predict multiple lesions on a patient basis.
-In addition, in the existing study, label data was manually assigned to all images, whereas in this study, multi-label data was automatically generated from a simple chart actually created by a doctor.
+In this study, label data consisting of a label indicating whether one or more lesions exist and a plurality of lesion labels is used.
+These improvements make it possible to predict multiple lesions on a patient basis.
+In addition, in the existing study, label data was manually assigned to all images, whereas in this study, multi-label data is automatically generated from a simple chart actually created by a doctor.
 Using this learning data, we trained and compared several models of 2D and 3D convolutional neural networks. 
-And some models recorded high inference performance.
-The F1-Score was 98\% or more in determining whether a patient had a lesion, and the F1-Score was 50\% or more in predicting multiple lesion information.
+Some models recorded high inference performance.
+The F1-Score is 98\% or more in determining whether a patient had a lesion, and the F1-Score is 50\% or more in predicting multiple lesion information.
 We also generate predictions with multiple reliability levels when predicting labels.
-In the prediction of multiple lesion information, the precision was 87\% or more for highly reliable predictions, and the recall was 81\% or more for lowly reliability predictions.
+In the prediction of multiple lesion information, the precision is 87\% or more for highly reliable predictions, and the recall is 81\% or more for lowly reliability predictions.
 As a result, the proposed system can be used to support the judgment of doctors.

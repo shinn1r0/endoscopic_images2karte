@@ -8,7 +8,9 @@
 そのため以下に続くデータセットとモデルの作成においても、それぞれ２種類用意した。
 
 \textcircled{\scriptsize 1}の手法における学習手法は、患者単位の画像を１枚ずつモデルに入力し、出力された各ラベルとその患者のラベルから損失を計算し最適化を行うことを、画像の枚数回繰り返すという方法である。
+
 \textcircled{\scriptsize 2}の手法における学習手法は、患者単位の画像を三次元データとしてモデルに入力し、出力された１つのラベルとその患者のラベルから損失を計算し最適化を行うという方法である。
+
 学習手法は２つの手法で異なっているが、推論時はどちらの手法においても患者単位の画像を全て入力し、１人の患者のラベルを予測した。
 \begin{figure}[htbp]
     \begin{center}
@@ -201,6 +203,44 @@
 ResNet\cite{ResNet}はネットワークの主要部分で畳み込みを行って、ショートカット部分でその畳み込みを飛ばす構造をしている。
 DenseNet\cite{DenseNet}では主要部分では畳み込みを行わず、分岐した部分に設置したDense Blockによって畳み込みを行い、その出力が主要部分で合流する構造をしている。
 これによりResNet\cite{ResNet}より少ないパラメータ数で効率良く特徴抽出ができることが確認されている。
+
+Dense Blockの式は複数の層の集合からなり、第l層の出力を$x_l$とすると、Dense Block全体での第l層の出力は以下の式で表される。
+\begin{equation}
+    x_l = H_l([x_0, x_1, … , x_{l-1}])
+\end{equation}
+ここで$H_l$は
+
+バッチ正規化
+
+\begin{equation}
+     y = \frac{x - E[x]}{\sqrt{Var[x] + \epsilon}} * \beta + \gamma
+\end{equation}
+$\beta$と$\gamma$はパラメータで通常は1と0である。
+
+ReLU活性化関数
+
+\begin{equation}
+     ReLU(x) = max(0, x)
+\end{equation}
+
+3x3の畳み込み層
+
+バッチサイズが$N$、チャンネルが$C$、画像の高さが$H$、幅が$W$のとし、入力テンソルの形式が$(N, C_{in}, H, W)$で出力テンソルの形式が$(N, C_{out}, H_{out}, W_{out})$のとき、
+\begin{equation}
+    out(N_i, C_{out_j}) = bias(C_{out_j}) + \sum_{k=0}^{C_{in} - 1} weight(C_{out}, k) * input(N_i, k)
+\end{equation}
+またこのとき、$H_{out}$と$W_{out}$は以下のように計算される。畳み込み幅(kernel\_size)、余白(padding)、畳み込みの移動幅(stride)、畳み込みの際にピクセル間に取る空白(dilation)を画像の高さと幅の２次元配列で設定した際、
+
+\begin{equation}
+H_{out} = \frac{H_{in} + 2 \times padding[0] - dilation[0] \times (kernel\_size[0] - 1) - 1}{stride[0]} + 1
+\end{equation}
+
+\begin{equation}
+W_{out} = \frac{W_{in} + 2 \times padding[1] - dilation[1] \times (kernel\_size[1] - 1) - 1}{stride[1]} + 1
+\end{equation}
+
+からなる合成関数である。
+
     \item 画像を患者ごとにまとめて入力する手法\\
 この手法では画像を連結し、時系列データを三次元データとして入力するため、CNNを三次元に拡張した3D-CNNを用いた。
 3D-CNNの中でも現在最も良い性能を持っている3D-ResNet\cite{3D_ResNet}を選択した。
@@ -235,6 +275,16 @@ DenseNetのチューニングをし、複数のモデルを用意した。
 また今回の実験ではより複雑な特徴にも対応するために、層の数の異なる２つのDenseNetで学習した。
 それぞれDenseNet121\cite{DenseNet}とDenseNet161\cite{DenseNet}というモデルを用いた。
 このため合わせて４パターンで実験を行った。
+
+DenseNet121において分類器拡張をしていないものをモデル１とし、図\ref{fig:model11}に示す。
+
+DenseNet121において分類器拡張をしたものをモデル２とし、\ref{fig:model12}に示す。
+
+DenseNet161において分類器拡張をしていないものをモデル３とし、\ref{fig:model13}に示
+す。
+
+DenseNet161において分類器拡張をしたものをモデル４とし、\ref{fig:model14}に示す。
+
 \subsection{3D-ResNetのチューニング}
 
 3D-ResNetのチューニングをし、複数のモデルを用意した。
@@ -244,3 +294,11 @@ DenseNetのチューニングをし、複数のモデルを用意した。
 また分類器部分でもDenseNetのときと同じように２つのパターンを用意した。
 これは一層の全結合層のみのものと、複数の全結合層とバッチ正規化とドロップアウトからなる構造のものである。
 このため合わせて４パターンで実験を行った。
+
+3D-ResNetで平均プーリングを用いて分類器をしていないものをモデル１とし、図\ref{fig:model21}に示す。
+
+3D-ResNetで平均プーリングを用いて分類器をしたものをモデル２とし、図\ref{fig:model22}に示す。
+
+3D-ResNetで最大プーリングを用いて分類器をしていないものをモデル３とし、図\ref{fig:model23}に示す。
+
+3D-ResNetで最大プーリングを用いて分類器をしたものをモデル４とし、図\ref{fig:model24}に示す。
