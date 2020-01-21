@@ -65,6 +65,12 @@ F1{\rm \mathchar"712D}Score = \frac{Precision * Recall}{(Precision + Recall) / 2
 \subsection{最も性能の良いモデルの選定}
 \label{sec:ex1}
 \subsubsection{実験概要}
+\ref{sec:densenet}で述べたように、DenseNetをチューニングした４つのモデルを提案手法とし、実験で用いた。
+層の数の異なる２つのDenseNetであるDenseNet121とDenseNet161の２パターンのモデル
+において、分類器部分の構造を拡張した分類器拡張ありと分類器拡張なしの２パターンの構造を用いた。
+分類器拡張は、分類器拡張がないモデルが一層の全結合層からなるのに対して、分類器拡張ありのモデルでは二つの全結合層とその層の間にバッチ正規化と活性化関数とドロップアウトを適用したものである。
+それらの合計４つのモデルを以下のように定義する。
+
 \begin{enumerate}
     \item DenseNet121-分類器拡張なし (モデル１)
     \item DenseNet121-分類器拡張あり (モデル２)
@@ -248,6 +254,11 @@ F1{\rm \mathchar"712D}Score = \frac{Precision * Recall}{(Precision + Recall) / 2
 \subsection{最も性能の良いモデルの選定}
 \label{sec:ex2}
 \subsubsection{実験概要}
+\ref{sec:resnet3d}で述べたように、3D-ResNetをチューニングした４つのモデルを提案手法とし、実験で用いた。
+3D-ResNetの特徴抽出部分の最終層で平均プーリングを用いたものと最大プーリングを用いたものの２つのモデルにおいて、分類器部分の構造を拡張した分類器拡張ありと分類器拡張なしの２パターンの構造を用いた。
+分類器拡張は、分類器拡張がないモデルが一層の全結合層からなるのに対して、分類器拡張ありのモデルでは二つの全結合層とその層の間にバッチ正規化と活性化関数とドロップアウトを適用したものである。
+それらの合計４つのモデルを以下のように定義する。
+
 \begin{enumerate}
     \item 3D-ResNet-AveragePool-分類器拡張なし (モデル１)
     \item 3D-ResNet-AveragePool-分類器拡張あり (モデル２)
