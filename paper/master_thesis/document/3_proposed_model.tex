@@ -210,7 +210,7 @@ DenseNet\cite{DenseNet}では主要部分では畳み込みを行わず、分岐
 
 Dense Blockの式は複数の層の集合からなり、第l層の出力を\mbox{\boldmath $x_l$}とすると、Dense Block全体での第l層の出力は以下の式で表される。
 \begin{equation}
-    x_l = H_l([x_0, x_1, … , x_{l-1}])
+    \mbox{\boldmath $x_l$} = H_l([\mbox{\boldmath $x_0$}, \mbox{\boldmath $x_1$}, … , \mbox{\boldmath $x_{l-1}$}])
 \end{equation}
 
 ここで$H_l$はバッチ正規化、ReLU活性化関数、$3 \times 3$の畳み込み層からなる合成関数である。
