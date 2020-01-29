@@ -8,7 +8,7 @@ In this study, label data consisting of a label indicating whether one or more l
 These improvements make it possible to predict multiple lesions on a patient basis.
 In addition, in the existing study, label data was manually assigned to all images, whereas in this study, multi-label data is automatically generated from a simple chart actually created by a doctor.
 Using this learning data, we trained and compared several models of 2D and 3D convolutional neural networks. 
-Some models recorded high inference performance.
+Some models recorded high inference performance for the task of predicting 10 or more multi-label simultaneously.
 The F1-Score is 98\% or more in determining whether a patient had a lesion, and the F1-Score is 50\% or more in predicting multiple lesion information.
 We also generate predictions with multiple reliability levels when predicting labels.
 In the prediction of multiple lesion information, the precision is 87\% or more for highly reliable predictions, and the recall is 81\% or more for lowly reliability predictions.
